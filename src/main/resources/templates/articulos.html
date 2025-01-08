@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		
+		<meta charset ="UTF-8">
+		<title>  Mantenimiento de articulos </title>
+		<link th:href="@{/css/style.css}" rel="stylesheet" />
+	</head>	
+	<body>
+		<div class="informacion"> 
+			<h1> Mantenimiento de articulos</h1><br>	
+			<h2 th:if="${listaArticulosDTO.isEmpty()}"> No hay articulos</h2><br>
+			<div th:if="${!listaArticulosDTO.isEmpty()}">  
+				<table border="1" >
+					<thead>
+						<tr>
+							<td>ID</td>
+							<td>Tipo</td>
+							<td>Marca</td>
+							<td>Color</td>
+							<td>Material</td>
+							<td>Id usuario</td>
+						</tr>
+					</thead> <!-- Fin cabecera -->
+					<tbody>
+						<tr th:each="articuloDTO : ${listaArticulosDTO}"> 
+							<td th:text="${articuloDTO.id}" ></td>
+							<td th:text="${articuloDTO.tipo}"></td>
+							<td th:text="${articuloDTO.marca}"></td>
+							<td th:text="${articuloDTO.color}"></td>
+							<td th:text="${articuloDTO.material}"></td>
+					<!--<td th:text="${articuloDTO.usuario.getId()}"></td>-->		
+						</tr>
+					</tbody>	
+				</table>
+				<br>
+			</div>
+		</div>
+		
+	</body>
+</html>
