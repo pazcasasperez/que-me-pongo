@@ -14,27 +14,27 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="tansacciones")
+@Table(name = "transacciones")
 public class Transaccion {
-	//Atributos
+	// Atributos
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String estado;
-	@Column(name="gastos_envio")
+	@Column(name = "gastos_envio")
 	private double gastosEnvio;
 	private LocalDate fecha;
-	
-	//Relaciones
-	/*
+	@Column(name = "id_pago_compra")
 	private Pago pagoCompra;
-	private Pago pagoVenta;
+	@Column(name = "id_dir_envio")
 	private Direccion envio;
+	@Column(name = "id_dir_vendedor")
 	private Direccion direccionVendedor;
+	@Column(name = "id_usuario_compra")
 	private Usuario usuarioCompra;
-	private List<Usuario> listaUsuariosVendedores;*/
-	
-	//Equals y hashCode
+	private List<Usuario> listaUsuariosVendedores;
+
+	// Equals y hashCode
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -46,6 +46,7 @@ public class Transaccion {
 		Transaccion other = (Transaccion) obj;
 		return Objects.equals(id, other.id);
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
