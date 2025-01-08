@@ -26,12 +26,13 @@ public class Transaccion {
 	private LocalDate fecha;
 	
 	//Relaciones
+	/*
 	private Pago pagoCompra;
 	private Pago pagoVenta;
 	private Direccion envio;
 	private Direccion direccionVendedor;
 	private Usuario usuarioCompra;
-	private List<Usuario> listaUsuariosVendedores;
+	private List<Usuario> listaUsuariosVendedores;*/
 	
 	//Equals y hashCode
 	@Override

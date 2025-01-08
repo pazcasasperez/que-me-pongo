@@ -25,6 +25,7 @@ public class Direccion {
 	@Column(name="cp")
 	private String codigoPostal;
 	private String provincia;
+	private boolean activo;
 	private String ciudad;
 	@Column(name="nombre_pto_recogida")
 	private String nombrePuntoRecogida;

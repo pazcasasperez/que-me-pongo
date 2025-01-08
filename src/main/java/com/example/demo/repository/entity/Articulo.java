@@ -43,10 +43,11 @@ public class Articulo {
 	
 	
 	//Relaciones
+	/*
 	@ManyToOne 
 	@JoinColumn(name="id_usuario")
 	@ToString.Exclude
-	private Usuario usuario;
+	private Usuario usuario;*/
 	
 	// Equals y hash
 	@Override
