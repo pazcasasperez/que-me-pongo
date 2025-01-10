@@ -2,7 +2,6 @@ package com.example.demo.model.dto;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 import com.example.demo.repository.entity.Direccion;
 import com.example.demo.repository.entity.Pago;
