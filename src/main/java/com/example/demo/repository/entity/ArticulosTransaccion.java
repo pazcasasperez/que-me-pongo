@@ -1,10 +1,17 @@
 package com.example.demo.repository.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -22,9 +29,20 @@ public class ArticulosTransaccion {
     @Column(name="id_transaccion")
     private Long idTransaccion;
     @Column(name="precio_venta")
-    private double preciVenta;
+    private double precioVenta;
     @Column(name = "precio_final")
     private double precioFinal;
+
+    //Relacionamos articulostransaccion con las tablas correspondientes
+ @ManyToOne
+ @JoinColumn(name="id_transaccion")
+ private Transaccion transaccion;
+
+ @ManyToOne
+ @JoinColumn(name = "id_articulo")
+ private Articulo articulo;
+
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

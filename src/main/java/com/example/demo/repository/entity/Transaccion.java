@@ -1,16 +1,22 @@
 package com.example.demo.repository.entity;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -33,6 +39,18 @@ public class Transaccion {
 	@Column(name = "id_usuario_compra")
 	private Usuario usuarioCompra;
 	private List<Usuario> listaUsuariosVendedores;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transaccion")
+	@ToString.Exclude
+	private Set<ArticulosTransaccion> listaArticulosTransaccion;
+
+
+	
+	public Transaccion() {
+		super();
+
+		this.listaArticulosTransaccion = new HashSet<ArticulosTransaccion>();
+	}
 
 	// Equals y hashCode
 	@Override
