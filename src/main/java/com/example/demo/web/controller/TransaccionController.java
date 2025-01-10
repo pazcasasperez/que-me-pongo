@@ -1,5 +1,6 @@
 package com.example.demo.web.controller;
 
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,17 +9,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.model.dto.TransaccionDTO;
+import com.example.demo.service.TransaccionService;
 
 @Controller
 public class TransaccionController {
-@Autowired
+	@Autowired
+	private TransaccionService transaccionService;
 	private static final Logger log = LoggerFactory.getLogger(ArticuloController.class);
-	
+
 	@GetMapping("/transacciones")
-	public ModelAndView show() {
-		
-		
+	public ModelAndView findAll() {
+		log.info(ArticuloController.class.getSimpleName() + "  -- Listando los articulos");
+
 		ModelAndView mav = new ModelAndView("transacciones");
-				return mav;
+		List<TransaccionDTO> listaTransaccionesDTO = transaccionService.findAll();
+
+		mav.addObject("listaArticulosDTO", listaTransaccionesDTO);
+		return mav;
 	}
 }

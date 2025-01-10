@@ -53,7 +53,7 @@ public class Articulo {
 	 * private Usuario usuario;
 	 */
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cliente")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
 	@ToString.Exclude
 	private Set<ArticulosTransaccion> listaArticulosTransaccion;
 
