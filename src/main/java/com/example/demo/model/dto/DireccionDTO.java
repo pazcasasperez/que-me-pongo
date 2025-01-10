@@ -88,20 +88,6 @@ public class DireccionDTO {
 		direccion.setHorariosPuntorecogida(direccionDTO.getHorariosPuntorecogida());
 		direccion.setPersonaContactoPuntoRecogida(direccionDTO.getPersonaContactoPuntoRecogida());
 
-		/*
-		 * 1º Definir e implementar los entity
-		 * 
-		 * 2º Definir e implementar los DTO (Siempre serializables)
-		 * 
-		 * 3º Definir e implementar los controller
-		 * 
-		 * 4º Definir e implementar los service
-		 * 
-		 * 5º Definir e implementar los repository
-		 * 
-		 * 6º Definir e implementar las vistas
-		 */
-
 		return direccion;
 	}
 }

@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Direcciones</title>
+  </head>
+  <body>
+    <div class="direccion">
+      <h1>Direcciones</h1>
+      <h2 th:if="${listaDireccionDTO.isEmpty()}">No hay direcciones</h2>
+      <div th:if="${!listaDireccionDTO.isEmpty()}">
+        <table border="1">
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>Via</td>
+              <td>Nombre</td>
+              <td>Numero</td>
+              <td>Puerta</td>
+              <td>Codigo Postal</td>
+              <td>Provincia</td>
+              <td>Activo</td>
+              <td>Ciudad</td>
+              <td>Nombre Punto Recogida</td>
+              <td>Telefono Punto Recogida</td>
+              <td>Horarios Punto Recogida</td>
+              <td>Persona Contacto Punto Recogida</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="direccionDTO : ${listaDireccionDTO}">
+              <td th:text="${direccionDTO.id}"></td>
+              <td th:text="${direccionDTO.via}"></td>
+              <td th:text="${direccionDTO.nombre}"></td>
+              <td th:text="${direccionDTO.puerta}"></td>
+              <td th:text="${direccionDTO.codigoPostal}"></td>
+              <td th:text="${direccionDTO.provincia}"></td>
+              <td th:text="${direccionDTO.activo}"></td>
+              <td th:text="${direccionDTO.ciudad}"></td>
+              <td th:text="${direccionDTO.nombrePuntoRecogida}"></td>
+              <td th:text="${direccionDTO.telefonoPuntoRecogida}"></td>
+              <td th:text="${direccionDTO.horariosPuntorecogida}"></td>
+              <td th:text="${direccionDTO.personaContactoPuntoRecogida}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
 </html>
