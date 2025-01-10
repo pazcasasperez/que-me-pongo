@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		
+		<meta charset ="UTF-8">
+		<title>  Mantenimiento de pagos </title>
+		<link th:href="@{/css/style.css}" rel="stylesheet" />
+	</head>	
+	<body>
+		<div class="informacion"> 
+			<h1> Mantenimiento de pagos</h1><br>	
+			<h2 th:if="${listaPagosDTO.isEmpty()}"> No hay pagos</h2><br>
+			<div th:if="${!listaPagosDTO.isEmpty()}">  
+				<table border="1" >
+					<thead>
+						<tr>
+							<td>ID</td>
+							<td>Tipo</td>
+							<td>Fecha de caducidad tarjeta</td>
+							<td>Nº tarjeta</td>
+							<td>CVC tarjeta</td>
+							<td>Correo</td>
+							<td>Nº tlf</td>
+							
+						</tr>
+					</thead> <!-- Fin cabecera -->
+					<tbody>
+						<tr th:each="pagoDTO : ${listaPagosDTO}"> 
+							<td th:text="${pagoDTO.id}" ></td>
+							<td th:text="${pagoDTO.tipo}"></td>
+							<td th:text="${pagoDTO.fechaCaducidadTarjeta}"></td>
+							<td th:text="${pagoDTO.nombreTarjeta}"></td>
+							<td th:text="${pagoDTO.cvcTarjeta}"></td>
+							<td th:text="${pagoDTO.correo}"></td>
+							<td th:text="${pagoDTO.numeroTelefono}"></td>
+					<!--<td th:text="${articuloDTO.usuario.getId()}"></td>-->		
+						</tr>
+					</tbody>	
+				</table>
+				<br>
+			</div>
+		</div>		
+	</body>
+</html>
