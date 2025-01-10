@@ -20,7 +20,7 @@ public class ArticuloController {
 	private ArticuloService articuloService;
 	private static final Logger log = LoggerFactory.getLogger(ArticuloController.class);
 	
-	@GetMapping("/s")
+	@GetMapping("/articulos")
 	public ModelAndView findAll() {
 		log.info(ArticuloController.class.getSimpleName() + "  -- Listando los articulos");
 		
