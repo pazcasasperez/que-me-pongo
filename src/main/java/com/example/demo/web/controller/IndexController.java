@@ -10,6 +10,7 @@ public class IndexController {
 
 	@Value("${aplicacion.nombre}")
 	private String nombreAplicacion;
+
 	
 	@Value("${asignatura}")
 	private String nombreAsignatura;
@@ -20,6 +21,7 @@ public class IndexController {
 		ModelAndView mv = new ModelAndView("index");
 		mv.addObject("titulo", nombreAplicacion);
 		mv.addObject("nombreAsignatura", nombreAsignatura);
+
 		
 		return mv;
 	}
