@@ -1,12 +1,15 @@
 package com.example.demo.model.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.example.demo.repository.entity.Usuario;
 
 import jakarta.persistence.Column;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class UsuarioDTO {
