@@ -22,15 +22,15 @@ public class TransaccionServiceImpl implements TransaccionService {
 
     @Override
     public List<TransaccionDTO> findAll() {
-        log.info(TransaccionRepository.class.getSimpleName() + "asjhkihsdfhsdi");
+        log.info(TransaccionRepository.class.getSimpleName() + "  -- Cambio a dto");
 
         List<Transaccion> listaTransaccion = transaccionRepository.findAll();
-        List<TransaccionDTO> listaTransaccoionDTO = new ArrayList<TransaccionDTO>();
+        List<TransaccionDTO> listaTransaccionDTO = new ArrayList<TransaccionDTO>();
         for (Transaccion a : listaTransaccion) {
-            listaTransaccoionDTO.add(TransaccionDTO.convertToDTO(a));
+            listaTransaccionDTO.add(TransaccionDTO.convertToDTO(a));
         }
 
-        return listaTransaccoionDTO;
+        return listaTransaccionDTO;
     }
 
 }

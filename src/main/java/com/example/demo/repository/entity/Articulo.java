@@ -55,7 +55,7 @@ public class Articulo {
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
 	@ToString.Exclude
-	private Set<ArticulosTransaccion> listaArticulosTransaccion;
+	private Set<ArticuloTransaccion> listaArticulosTransaccion;
 
 	// Equals y hash
 	@Override
@@ -78,6 +78,6 @@ public class Articulo {
 	public Articulo() {
 		super();
 
-		this.listaArticulosTransaccion = new HashSet<ArticulosTransaccion>();
+		this.listaArticulosTransaccion = new HashSet<ArticuloTransaccion>();
 	}
 }

@@ -20,12 +20,12 @@ public class TransaccionController {
 
 	@GetMapping("/transacciones")
 	public ModelAndView findAll() {
-		log.info(ArticuloController.class.getSimpleName() + "  -- Listando los articulos");
+		log.info(TransaccionController.class.getSimpleName() + "  -- Listando todas las transacciones");
 
 		ModelAndView mav = new ModelAndView("transacciones");
 		List<TransaccionDTO> listaTransaccionesDTO = transaccionService.findAll();
 
-		mav.addObject("listaArticulosDTO", listaTransaccionesDTO);
+		mav.addObject("listaTransaccionesDTO", listaTransaccionesDTO);
 		return mav;
 	}
 }

@@ -36,6 +36,7 @@ public class TransaccionDTO {
         transaccionDTO.setEnvio(transaccion.getEnvio());
         transaccionDTO.setDireccionVendedor(transaccion.getDireccionVendedor());
         transaccionDTO.setUsuarioCompra(transaccion.getUsuarioCompra());
+        transaccionDTO.setDireccionVendedor(transaccion.getDireccionVendedor());
 
         return transaccionDTO;
 
@@ -53,6 +54,7 @@ public class TransaccionDTO {
         transaccion.setDireccionVendedor(transaccionDTO.getDireccionVendedor());
         transaccion.setUsuarioCompra(transaccionDTO.getUsuarioCompra());
 
+       
         return transaccion;
 
     }

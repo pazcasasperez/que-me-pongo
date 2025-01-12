@@ -1,6 +1,6 @@
 package com.example.demo.model.dto;
 
-import com.example.demo.repository.entity.ArticulosTransaccion;
+import com.example.demo.repository.entity.ArticuloTransaccion;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-public class ArticulosTransaccionDTO {
+public class ArticuloTransaccionDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +19,8 @@ public class ArticulosTransaccionDTO {
     private double precioVenta;
     private double precioFinal;
 
-    ArticulosTransaccionDTO convertToDTO(ArticulosTransaccion articulosTransaccion) {
-        ArticulosTransaccionDTO articulosTransaccionDTO = new ArticulosTransaccionDTO();
+     public static ArticuloTransaccionDTO convertToDTO(ArticuloTransaccion articulosTransaccion) {
+        ArticuloTransaccionDTO articulosTransaccionDTO = new ArticuloTransaccionDTO();
 
         articulosTransaccionDTO.setId(articulosTransaccion.getId());
         articulosTransaccionDTO.setIdArticulo(articulosTransaccion.getIdArticulo());
@@ -31,8 +31,8 @@ public class ArticulosTransaccionDTO {
         return articulosTransaccionDTO;
     }
 
-    ArticulosTransaccion convertToEntity(ArticulosTransaccionDTO articulosTransaccionDTO) {
-        ArticulosTransaccion articulosTransaccion = new ArticulosTransaccion();
+    ArticuloTransaccion convertToEntity(ArticuloTransaccionDTO articulosTransaccionDTO) {
+        ArticuloTransaccion articulosTransaccion = new ArticuloTransaccion();
 
         articulosTransaccion.setId(articulosTransaccionDTO.getId());
         articulosTransaccion.setIdArticulo(articulosTransaccionDTO.getIdArticulo());

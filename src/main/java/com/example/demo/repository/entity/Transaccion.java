@@ -1,6 +1,7 @@
 package com.example.demo.repository.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +14,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -30,7 +33,8 @@ public class Transaccion {
 	@Column(name = "gastos_envio")
 	private double gastosEnvio;
 	private LocalDate fecha;
-	@Column(name = "id_pago_compra")
+	@ManyToOne
+	@JoinColumn(name = "id_pago_compra")
 	private Pago pagoCompra;
 	@Column(name = "id_dir_envio")
 	private Direccion envio;
@@ -38,18 +42,21 @@ public class Transaccion {
 	private Direccion direccionVendedor;
 	@Column(name = "id_usuario_compra")
 	private Usuario usuarioCompra;
-	private List<Usuario> listaUsuariosVendedores;
+	
+	// private List<Usuario> listaUsuariosVendedores;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transaccion")
 	@ToString.Exclude
-	private Set<ArticulosTransaccion> listaArticulosTransaccion;
+	private Set<ArticuloTransaccion> listaArticulosTransaccion;
 
+	//  @OneToMany(mappedBy = "transaccion", cascade = CascadeType.ALL)
+    // private List<Pago> pagos = new ArrayList<>();
 
 	
 	public Transaccion() {
 		super();
 
-		this.listaArticulosTransaccion = new HashSet<ArticulosTransaccion>();
+		this.listaArticulosTransaccion = new HashSet<ArticuloTransaccion>();
 	}
 
 	// Equals y hashCode
