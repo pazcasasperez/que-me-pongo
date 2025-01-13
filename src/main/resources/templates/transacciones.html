@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Mantenimiento de articulos</title>
+		<link th:href="@{/css/style.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="informacion">
+			<h1>TRANSACCIONES</h1>
+			<br />
+			<br />
+			<div>
+				<table border="1">
+					<thead>
+						<tr>
+							<td>ID</td>
+							<td>Estado</td>
+							<td>Gastos envio</td>
+							<td>Fecha</td>
+							<td>id pago compra</td>
+							<td>Id direccion envio</td>
+							<td>Id direccion vendedor</td>
+							<td>Id direccion usuario compra</td>
+						</tr>
+					</thead>
+					<!-- Fin cabecera -->
+					<tbody>
+						<tr th:each="transaccion : ${listaTransaccionesDTO}">
+							<td th:text="${transaccion.id}"></td>
+							<td th:text="${transaccion.estado}"></td>
+							<td th:text="${transaccion.gastosEnvio}"></td>
+							<td th:text="${transaccion.fecha}"></td>
+							<td th:text="${transaccion.pagoCompra.getId()}"></td>
+							<td th:text="${transaccion.envio.getId()}"></td>
+							<td th:text="${transaccion.direccionVendedor.getId()}"
+							></td>
+							<td th:text="${transaccion.usuarioCompra.getId()}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+			</div>
+		</div>
+	</body>
+</html>
