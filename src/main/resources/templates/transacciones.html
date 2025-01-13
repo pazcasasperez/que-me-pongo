@@ -30,11 +30,10 @@
 							<td th:text="${transaccion.estado}"></td>
 							<td th:text="${transaccion.gastosEnvio}"></td>
 							<td th:text="${transaccion.fecha}"></td>
-							<td th:text="${transaccion.pagoCompra.getId()}"></td>
-							<td th:text="${transaccion.envio.getId()}"></td>
-							<td th:text="${transaccion.direccionVendedor.getId()}"
-							></td>
-							<td th:text="${transaccion.usuarioCompra.getId()}"></td>
+							<td th:text="${transaccion.pagoCompra}"></td>
+							<td th:text="${transaccion.envio}"></td>
+                            <!-- <td th:text="${transaccion.direccionVendedor}"></td>
+                            <td th:text="${transaccion.usuarioCompra}"></td> -->
 						</tr>
 					</tbody>
 				</table>
