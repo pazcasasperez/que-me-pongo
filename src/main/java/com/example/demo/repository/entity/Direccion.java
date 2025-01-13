@@ -28,19 +28,20 @@ public class Direccion {
 	private String nombre;
 	private String numero;
 	private String puerta;
-	@Column(name="cp")
-	private String codigoPostal;
-	private String provincia;
-	private boolean activo;
-	private String ciudad;
-	@Column(name="nombre_pto_recogida")
-	private String nombrePuntoRecogida;
-	@Column(name="telefono_pto_recogida")
-	private String telefonoPuntoRecogida;
-	@Column(name="horario_pto_recogida")
-	private String horariosPuntorecogida;
-	@Column(name="persona_contacto_pto_recogida")
-	private String personaContactoPuntoRecogida;
+	// @Column(name="cp")
+	// private String codigoPostal;
+	// private String provincia;
+	// @Column(name = "activo")
+	// private Boolean activo;
+	// 	private String ciudad;
+	// @Column(name="nombre_pto_recogida")
+	// private String nombrePuntoRecogida;
+	// @Column(name="telefono_pto_recogida")
+	// private String telefonoPuntoRecogida;
+	// @Column(name="horario_pto_recogida")
+	// private String horariosPuntorecogida;
+	// @Column(name="persona_contacto_pto_recogida")
+	// private String personaContactoPuntoRecogida;
 	
 	// Mapeamos con la entidad UsuarioDireccion
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "direccion")
