@@ -19,8 +19,8 @@ public class TransaccionDTO {
     private double gastosEnvio;
     private LocalDate fecha;
     private Pago pagoCompra;
-    private Direccion envio;
-    private Direccion direccionVendedor;
+    // private Direccion envio;
+    // private Direccion direccionVendedor;
     private Usuario usuarioCompra;
     @ToString.Exclude
     private List<Usuario> listaUsuariosVendedores;
@@ -32,11 +32,11 @@ public class TransaccionDTO {
         transaccionDTO.setEstado(transaccion.getEstado());
         transaccionDTO.setGastosEnvio(transaccion.getGastosEnvio());
         transaccionDTO.setFecha(transaccion.getFecha());
-        transaccionDTO.setPagoCompra(transaccion.getPagoCompra());
-        transaccionDTO.setEnvio(transaccion.getEnvio());
-        transaccionDTO.setDireccionVendedor(transaccion.getDireccionVendedor());
-        transaccionDTO.setUsuarioCompra(transaccion.getUsuarioCompra());
-        transaccionDTO.setDireccionVendedor(transaccion.getDireccionVendedor());
+        // transaccionDTO.setPagoCompra(transaccion.getPagoCompra());
+        // transaccionDTO.setEnvio(transaccion.getEnvio());
+        // transaccionDTO.setDireccionVendedor(transaccion.getDireccionVendedor());
+        // transaccionDTO.setUsuarioCompra(transaccion.getUsuarioCompra());
+        // transaccionDTO.setDireccionVendedor(transaccion.getDireccionVendedor());
 
         return transaccionDTO;
 
@@ -49,10 +49,10 @@ public class TransaccionDTO {
         transaccion.setEstado(transaccionDTO.getEstado());
         transaccion.setGastosEnvio(transaccionDTO.getGastosEnvio());
         transaccion.setFecha(transaccionDTO.getFecha());
-        transaccion.setPagoCompra(transaccionDTO.getPagoCompra());
-        transaccion.setEnvio(transaccionDTO.getEnvio());
-        transaccion.setDireccionVendedor(transaccionDTO.getDireccionVendedor());
-        transaccion.setUsuarioCompra(transaccionDTO.getUsuarioCompra());
+        // transaccion.setPagoCompra(transaccionDTO.getPagoCompra());
+        // transaccion.setEnvio(transaccionDTO.getEnvio());
+        // transaccion.setDireccionVendedor(transaccionDTO.getDireccionVendedor());
+        // transaccion.setUsuarioCompra(transaccionDTO.getUsuarioCompra());
 
        
         return transaccion;
