@@ -28,6 +28,7 @@ public class Direccion {
 	private String nombre;
 	private String numero;
 	private String puerta;
+
 	@Column(name = "cp")
 	private String codigoPostal;
 	private String provincia;
@@ -47,6 +48,7 @@ public class Direccion {
 	// @ToString.Exclude
 	// private Set<UsuarioDireccion> listaUsuarioDireccion;
 
+
 	// hash y equals
 	@Override
 	public boolean equals(Object obj) {
@@ -65,8 +67,10 @@ public class Direccion {
 		return Objects.hash(id);
 	}
 
+
 	public Direccion() {
 		super();
 		//this.listaUsuarioDireccion = new HashSet<UsuarioDireccion>();
 	}
 }
+

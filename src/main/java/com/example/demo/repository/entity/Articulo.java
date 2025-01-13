@@ -42,6 +42,16 @@ public class Articulo {
 	@Column(name = "tipo_almacenamiento")
 	private String tipoAlmacenamiento;
 	private String estampado;
+/*
+	
+	
+	//Relaciones
+	@ManyToOne 
+	@JoinColumn(name="id_usuario")
+	@ToString.Exclude
+  private Usuario usuario;
+	
+*/
 
 	// Relaciones
 	/*
@@ -56,6 +66,7 @@ public class Articulo {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
 	@ToString.Exclude
 	private Set<ArticuloTransaccion> listaArticulosTransaccion;
+
 
 	// Equals y hash
 	@Override
