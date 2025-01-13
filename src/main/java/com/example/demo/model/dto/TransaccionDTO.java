@@ -39,9 +39,9 @@ public class TransaccionDTO {
         transaccionDTO.setPagoCompra(transaccion.getPagoCompra());
         transaccionDTO.setEnvio(transaccion.getEnvio());
         transaccionDTO.setDireccionVendedor(transaccion.getDireccionVendedor());
-         transaccionDTO.setUsuarioCompra(transaccion.getUsuarioCompra());
-     transaccionDTO.setDireccionVendedor(transaccion.getDireccionVendedor());
-       
+        transaccionDTO.setUsuarioCompra(transaccion.getUsuarioCompra());
+        transaccionDTO.setDireccionVendedor(transaccion.getDireccionVendedor());
+        transaccionDTO.setUsuarioCompra(transaccion.getUsuarioCompra());
 
         return transaccionDTO;
 
@@ -54,8 +54,8 @@ public class TransaccionDTO {
         transaccion.setEstado(transaccionDTO.getEstado());
         transaccion.setGastosEnvio(transaccionDTO.getGastosEnvio());
         transaccion.setFecha(transaccionDTO.getFecha());
-         transaccion.setPagoCompra(transaccionDTO.getPagoCompra());
-         transaccion.setEnvio(transaccionDTO.getEnvio());
+        transaccion.setPagoCompra(transaccionDTO.getPagoCompra());
+        transaccion.setEnvio(transaccionDTO.getEnvio());
         transaccion.setDireccionVendedor(transaccionDTO.getDireccionVendedor());
         transaccion.setUsuarioCompra(transaccionDTO.getUsuarioCompra());
 

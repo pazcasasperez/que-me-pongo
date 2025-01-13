@@ -55,9 +55,9 @@ public class Articulo {
 	
 */
 
-	// @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
-	// @ToString.Exclude
-	// private Set<ArticuloTransaccion> listaArticulosTransaccion;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
+	 @ToString.Exclude
+	 private Set<ArticuloTransaccion> listaArticulosTransaccion;
 
 
 	// Equals y hash
