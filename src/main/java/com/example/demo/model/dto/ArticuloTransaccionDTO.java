@@ -23,8 +23,8 @@ public class ArticuloTransaccionDTO {
         ArticuloTransaccionDTO articulosTransaccionDTO = new ArticuloTransaccionDTO();
 
         articulosTransaccionDTO.setId(articulosTransaccion.getId());
-        articulosTransaccionDTO.setIdArticulo(articulosTransaccion.getIdArticulo());
-        articulosTransaccionDTO.setIdTransaccion(articulosTransaccion.getIdTransaccion());
+        //articulosTransaccionDTO.setIdArticulo(articulosTransaccion.getIdArticulo());
+        //articulosTransaccionDTO.setIdTransaccion(articulosTransaccion.getIdTransaccion());
         articulosTransaccionDTO.setPrecioVenta(articulosTransaccion.getPrecioVenta());
         articulosTransaccionDTO.setPrecioFinal(articulosTransaccion.getPrecioFinal());
 
@@ -35,8 +35,8 @@ public class ArticuloTransaccionDTO {
         ArticuloTransaccion articulosTransaccion = new ArticuloTransaccion();
 
         articulosTransaccion.setId(articulosTransaccionDTO.getId());
-        articulosTransaccion.setIdArticulo(articulosTransaccionDTO.getIdArticulo());
-        articulosTransaccion.setIdTransaccion(articulosTransaccionDTO.getIdTransaccion());
+        //articulosTransaccion.setIdArticulo(articulosTransaccionDTO.getIdArticulo());
+        //articulosTransaccion.setIdTransaccion(articulosTransaccionDTO.getIdTransaccion());
         articulosTransaccion.setPrecioVenta(articulosTransaccionDTO.getPrecioVenta());
         articulosTransaccion.setPrecioFinal(articulosTransaccionDTO.getPrecioFinal());
 

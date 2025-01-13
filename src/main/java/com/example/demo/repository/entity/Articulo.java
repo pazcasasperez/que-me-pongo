@@ -62,12 +62,12 @@ public class Articulo {
 	 * @ToString.Exclude
 	 * private Usuario usuario;
 	 */
-
+/*
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
 	@ToString.Exclude
 	private Set<ArticuloTransaccion> listaArticulosTransaccion;
 
-
+*/
 	// Equals y hash
 	@Override
 	public boolean equals(Object obj) {
@@ -89,6 +89,6 @@ public class Articulo {
 	public Articulo() {
 		super();
 
-		this.listaArticulosTransaccion = new HashSet<ArticuloTransaccion>();
+		//this.listaArticulosTransaccion = new HashSet<ArticuloTransaccion>();
 	}
 }

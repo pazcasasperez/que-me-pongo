@@ -21,9 +21,9 @@ public class TransaccionDTO {
     private Pago pagoCompra;
     // private Direccion envio;
     // private Direccion direccionVendedor;
-    private Usuario usuarioCompra;
-    @ToString.Exclude
-    private List<Usuario> listaUsuariosVendedores;
+    //private Usuario usuarioCompra;
+    //@ToString.Exclude
+    //private List<Usuario> listaUsuariosVendedores;
 
     public static TransaccionDTO convertToDTO(Transaccion transaccion) {
         TransaccionDTO transaccionDTO = new TransaccionDTO();

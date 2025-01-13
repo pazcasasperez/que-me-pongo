@@ -40,15 +40,17 @@ public class Transaccion {
 	// private Direccion envio;
 	// @Column(name = "id_dir_vendedor")
 	// private Direccion direccionVendedor;
-	@Column(name = "id_usuario_compra")
-	private Usuario usuarioCompra;
+	//@Column(name = "id_usuario_compra")
+	//private Usuario usuarioCompra;
 	
 	// private List<Usuario> listaUsuariosVendedores;
-
+	
+	/* FALLA :  is 'mappedBy' a property named 'transaccion' which does not exist in the target entity 'com.example.demo.repository.entity.ArticuloTransaccion'
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transaccion")
 	@ToString.Exclude
 	private Set<ArticuloTransaccion> listaArticulosTransaccion;
-
+*/
 	//  @OneToMany(mappedBy = "transaccion", cascade = CascadeType.ALL)
     // private List<Pago> pagos = new ArrayList<>();
 
@@ -56,7 +58,7 @@ public class Transaccion {
 	public Transaccion() {
 		super();
 
-		this.listaArticulosTransaccion = new HashSet<ArticuloTransaccion>();
+		//this.listaArticulosTransaccion = new HashSet<ArticuloTransaccion>();
 	}
 
 	// Equals y hashCode

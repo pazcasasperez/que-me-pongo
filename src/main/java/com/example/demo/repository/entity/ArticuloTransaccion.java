@@ -19,16 +19,11 @@ public class ArticuloTransaccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "id_articulo")
-    private Long idArticulo;
-    @Column(name = "id_transaccion")
-    private Long idTransaccion;
     @Column(name = "precio_venta")
     private double precioVenta;
     @Column(name = "precio_final")
     private double precioFinal;
-
+    // CREO Q FUNCIONA EL MAPEO, PERO AL NO TENER DATOS NO FUNCIONA
     // Relacionamos articulostransaccion con las tablas correspondientes
     @ManyToOne
     @JoinColumn(name = "id_transaccion")

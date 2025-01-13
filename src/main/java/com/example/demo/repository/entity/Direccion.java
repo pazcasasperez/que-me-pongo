@@ -44,9 +44,9 @@ public class Direccion {
 	private String personaContactoPuntoRecogida;
 
 	// Mapeamos con la entidad UsuarioDireccion
-	// @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "direccion")
-	// @ToString.Exclude
-	// private Set<UsuarioDireccion> listaUsuarioDireccion;
+	 @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "direccion")
+	 @ToString.Exclude
+	 private Set<UsuarioDireccion> listaUsuarioDireccion;
 
 
 	// hash y equals
@@ -70,7 +70,7 @@ public class Direccion {
 
 	public Direccion() {
 		super();
-		//this.listaUsuarioDireccion = new HashSet<UsuarioDireccion>();
+		this.listaUsuarioDireccion = new HashSet<UsuarioDireccion>();
 	}
 }
 
