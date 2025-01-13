@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="pago")
+@Table(name="pagos")
 public class Pago {
 	//Atributos
 	@Id

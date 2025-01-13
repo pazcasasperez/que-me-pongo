@@ -3,6 +3,7 @@ package com.example.demo.model.dto;
 import java.util.Objects;
 
 import com.example.demo.repository.entity.Articulo;
+import com.example.demo.repository.entity.Usuario;
 
 import lombok.Data;
 
