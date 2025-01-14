@@ -14,6 +14,8 @@ import jakarta.transaction.Transactional;
 @Repository
 @Transactional
 public interface ArticuloTransaccionRepository extends JpaRepository<ArticuloTransaccion, Long> {
-    // @Query(value = "SELECT c FROM articulostransaccion c WHERE c.id_articulo.id = :idarticulo")
-    // public List<ArticuloTransaccion> findAllByArticulo(@Param("idarticulo") Long idarticulo);
+
+    @Query(value = "select * from articulostransaccion where id_articulo = :idarticulo", nativeQuery = true)
+   public  List<ArticuloTransaccion> findByArticulo(@Param("idarticulo") Long idArticulo);
+
 }
