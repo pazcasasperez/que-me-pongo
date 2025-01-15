@@ -50,7 +50,7 @@ public class TransaccionController {
 
 		List<ArticuloTransaccionDTO> listaArticuloTransaccionDTO = transaccionService.findByArticulo(articuloDTO);
 
-		ModelAndView mav = new ModelAndView("transacciones");
+		ModelAndView mav = new ModelAndView("articulotransaccion");
 
 		mav.addObject("listaArticuloTransaccionDTO", listaArticuloTransaccionDTO);
 		return mav;

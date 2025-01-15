@@ -9,9 +9,11 @@
 			<h1>TRANSACCIONES</h1>
 			<br />
 			<br />
-					 <h2 th:if="${listaArticuloTransaccionDTO.isEmpty()}">No hay transacciones en la BBDD</h2>
+			<h2 th:if="${listaTransaccionesDTO.isEmpty()}">
+				No hay transacciones en la BBDD
+			</h2>
 
-			<div th:if="${!listaArticuloTransaccionDTO.isEmpty()}">
+			<div th:if="${!listaTransaccionesDTO.isEmpty()}">
 				<table border="1">
 					<thead>
 						<tr>
@@ -27,15 +29,15 @@
 					</thead>
 					<!-- Fin cabecera -->
 					<tbody>
-						<tr th:each="aTransaccionDTO : ${listaArticuloTransaccionDTO}">
-							<td th:text="${aTransaccionDTO.transaccionDTO.id}"></td>
-							<td th:text="${aTransaccionDTO.transaccionDTO.estado}"></td>
-							<td th:text="${aTransaccionDTO.transaccionDTO.gastosEnvio}"></td>
-							<td th:text="${aTransaccionDTO.transaccionDTO.fecha}"></td>
-							<!-- <td th:text="${transaccion.pagoCompra}"></td>
+						<tr th:each="transaccion : ${listaTransaccionesDTO}">
+							<td th:text="${transaccion.id}"></td>
+							<td th:text="${transaccion.estado}"></td>
+							<td th:text="${transaccion.gastosEnvio}"></td>
+							<td th:text="${transaccion.fecha}"></td>
+							<td th:text="${transaccion.pagoCompra}"></td>
 							<td th:text="${transaccion.envio}"></td>
-                            <td th:text="${transaccion.direccionVendedor}"></td>
-                            < <td th:text="${transaccion.usuarioCompra}"></td>   -->
+							<td th:text="${transaccion.direccionVendedor}"></td>
+							<!-- < <td th:text="${transaccion.usuarioCompra}"></td>   -->
 						</tr>
 					</tbody>
 				</table>
