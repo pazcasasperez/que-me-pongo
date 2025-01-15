@@ -27,9 +27,7 @@ public class ArticuloDTO {
 	private String capacidad;
 	private String tipoAlmacenamiento;
 	private String estampado;
-	
-	//Relaciones
-	//private UsuarioDTO usuario;
+	// private UsuarioDTO usuario;
 	
 	//Hash y equals
 	@Override
@@ -69,6 +67,7 @@ public class ArticuloDTO {
 		articuloDTO.setCapacidad(articulo.getCapacidad());
 		articuloDTO.setTipoAlmacenamiento(articulo.getTipoAlmacenamiento());
 		articuloDTO.setEstampado(articulo.getEstampado());
+		
 		
 		return articuloDTO;
 	}

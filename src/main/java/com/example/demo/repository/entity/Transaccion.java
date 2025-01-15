@@ -33,32 +33,29 @@ public class Transaccion {
 	@Column(name = "gastos_envio")
 	private double gastosEnvio;
 	private LocalDate fecha;
-	// @ManyToOne
-	// @JoinColumn(name = "id_pago_compra")
-	// private Pago pagoCompra;
-	// @Column(name = "id_dir_envio")
-	// private Direccion envio;
-	// @Column(name = "id_dir_vendedor")
-	// private Direccion direccionVendedor;
-	//@Column(name = "id_usuario_compra")
-	//private Usuario usuarioCompra;
-	
+	@ManyToOne
+	@JoinColumn(name = "id_pago_compra")
+	private Pago pagoCompra;
+	@ManyToOne
+	@JoinColumn(name = "id_dir_envio")
+	private Direccion envio;
+	 @ManyToOne
+	@JoinColumn(name = "id_dir_vendedor")
+	private Direccion direccionVendedor;
+	@ManyToOne
+	@JoinColumn(name = "id_usuario_compra")
+	private Usuario usuarioCompra;
+
 	// private List<Usuario> listaUsuariosVendedores;
-	
-	/* FALLA :  is 'mappedBy' a property named 'transaccion' which does not exist in the target entity 'com.example.demo.repository.entity.ArticuloTransaccion'
-	
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transaccion")
 	@ToString.Exclude
-	private Set<ArticuloTransaccion> listaArticulosTransaccion;
-*/
-	//  @OneToMany(mappedBy = "transaccion", cascade = CascadeType.ALL)
-    // private List<Pago> pagos = new ArrayList<>();
+	private Set<ArticuloTransaccion> articulosTransacciones;
 
-	
 	public Transaccion() {
 		super();
 
-		//this.listaArticulosTransaccion = new HashSet<ArticuloTransaccion>();
+		this.articulosTransacciones = new HashSet<ArticuloTransaccion>();
 	}
 
 	// Equals y hashCode
