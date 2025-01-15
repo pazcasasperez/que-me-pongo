@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Mantenimiento de articulos</title>
+		<link th:href="@{/css/style.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="informacion">
+			<h1>TRANSACCIONES</h1>
+			<br />
+			<br />
+			<h2 th:if="${listaArticuloTransaccionDTO.isEmpty()}">
+				No hay transacciones en la BBDD
+			</h2>
+
+			<div th:if="${!listaArticuloTransaccionDTO.isEmpty()}">
+				<table border="1">
+					<thead>
+						<tr>
+							<td>ID</td>
+							<td>Estado</td>
+							<td>Gastos envio</td>
+							<td>Fecha</td>
+							<td>id pago compra</td>
+							<td>Id direccion envio</td>
+							<td>Id direccion vendedor</td>
+							<td>Id direccion usuario compra</td>
+							<td>Editar</td>
+							<td>Eliminar</td>
+						</tr>
+					</thead>
+					<!-- Fin cabecera -->
+					<tbody>
+						<tr th:each="aTransaccionDTO : ${listaArticuloTransaccionDTO}">
+							<td th:text="${aTransaccionDTO.transaccionDTO.id}"></td>
+							<td th:text="${aTransaccionDTO.transaccionDTO.estado}"></td>
+							<td th:text="${aTransaccionDTO.transaccionDTO.gastosEnvio}"></td>
+							<td th:text="${aTransaccionDTO.transaccionDTO.fecha}"></td>
+							<td th:text="${aTransaccionDTO.transaccionDTO.pagoCompra}"></td>
+							<td th:text="${aTransaccionDTO.transaccionDTO.envio}"></td>
+							<td th:text="${aTransaccionDTO.transaccionDTO.direccionVendedor}">
+							
+							</td>
+
+							<td
+								th:text="${aTransaccionDTO.transaccionDTO.usuarioCompra}"></td>
+
+								<td>	<a
+									th:href="@{/transacciones/{idaTransaccion}/update (idaTransaccion=${aTransaccionDTO.id})}"
+									>Editar transaccion</a
+								></td>
+									<td>	<a
+									th:href="@{/transacciones/{idaTransaccion}/delete (idaTransaccion=${aTransaccionDTO.id})}"
+									>Borrar transaccion</a
+								></td>
+
+						</tr>
+					</tbody>
+				</table>
+				<br />
+			</div>
+		</div>
+		<a th:href="@{/transacciones/add}">Añadir transaccion</a>
+	</body>
+</html>

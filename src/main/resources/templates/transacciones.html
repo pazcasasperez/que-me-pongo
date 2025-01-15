@@ -9,7 +9,11 @@
 			<h1>TRANSACCIONES</h1>
 			<br />
 			<br />
-			<div>
+			<h2 th:if="${listaTransaccionesDTO.isEmpty()}">
+				No hay transacciones en la BBDD
+			</h2>
+
+			<div th:if="${!listaTransaccionesDTO.isEmpty()}">
 				<table border="1">
 					<thead>
 						<tr>
@@ -30,11 +34,10 @@
 							<td th:text="${transaccion.estado}"></td>
 							<td th:text="${transaccion.gastosEnvio}"></td>
 							<td th:text="${transaccion.fecha}"></td>
-							<td th:text="${transaccion.pagoCompra.getId()}"></td>
-							<td th:text="${transaccion.envio.getId()}"></td>
-							<td th:text="${transaccion.direccionVendedor.getId()}"
-							></td>
-							<td th:text="${transaccion.usuarioCompra.getId()}"></td>
+							<td th:text="${transaccion.pagoCompra}"></td>
+							<td th:text="${transaccion.envio}"></td>
+							<td th:text="${transaccion.direccionVendedor}"></td>
+							<!-- < <td th:text="${transaccion.usuarioCompra}"></td>   -->
 						</tr>
 					</tbody>
 				</table>

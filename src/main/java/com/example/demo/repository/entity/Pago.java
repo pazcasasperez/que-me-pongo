@@ -31,6 +31,7 @@ public class Pago {
 	@Column(name="n_telefono")
 	private String numeroTelefono;
 	
+
 	
 	//Hash y equals
 	@Override
