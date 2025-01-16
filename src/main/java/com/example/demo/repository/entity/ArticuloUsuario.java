@@ -1,5 +1,6 @@
 package com.example.demo.repository.entity;
 
+import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -7,33 +8,37 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
-@Table(name="pago")
-public class Pago {
-	//Atributos
+@Table(name="articulosusuarios")
+public class ArticuloUsuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String tipo;
-	@Column(name="t_numero")
-	private String numeroTarjeta;
-	@Column(name="t_caducidad")
-	private String fechaCaducidadTarjeta;
-	@Column(name="t_nombre")
-	private String nombreTarjeta;
-	@Column(name="t_cvc")
-	private String cvcTarjeta;
-	private String correo;
-	@Column(name="n_telefono")
-	private String numeroTelefono;
 	
-
+	@ManyToOne 
+	@JoinColumn(name="id_usuario")
+	@ToString.Exclude
+	private Usuario usuario;
 	
-	//Hash y equals
+	@ManyToOne 
+	@JoinColumn(name="id_articulo")
+	@ToString.Exclude
+	private Articulo articulo;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fecha;
+	
+	
+	//EQUALS y HASH
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -42,7 +47,7 @@ public class Pago {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pago other = (Pago) obj;
+		ArticuloUsuario other = (ArticuloUsuario) obj;
 		return Objects.equals(id, other.id);
 	}
 	@Override
@@ -50,4 +55,7 @@ public class Pago {
 		return Objects.hash(id);
 	}
 	
+	
+	
+
 }

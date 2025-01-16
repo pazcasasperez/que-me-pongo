@@ -31,4 +31,14 @@ public class ArticuloServiceImpl implements ArticuloService {
 		return listaArticulosDTO;
 	}
 
+	@Override
+	public ArticuloDTO findById(Long idArticulo) {
+		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos el articulo con id " + idArticulo + " al servicio");
+		
+		Articulo a = articuloRepository.findById(idArticulo).get();
+		ArticuloDTO articuloDTO = ArticuloDTO.convertToDTO(a);
+		
+		return articuloDTO;
+	}
+
 }

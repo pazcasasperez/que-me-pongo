@@ -8,8 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.dto.ArticuloDTO;
+import com.example.demo.model.dto.ArticuloTransaccionDTO;
 import com.example.demo.model.dto.TransaccionDTO;
+import com.example.demo.repository.dao.ArticuloTransaccionRepository;
 import com.example.demo.repository.dao.TransaccionRepository;
+import com.example.demo.repository.entity.ArticuloTransaccion;
 import com.example.demo.repository.entity.Transaccion;
 import com.example.demo.web.controller.ArticuloController;
 
@@ -19,6 +23,9 @@ public class TransaccionServiceImpl implements TransaccionService {
 
     @Autowired
     private TransaccionRepository transaccionRepository;
+
+    @Autowired
+    private ArticuloTransaccionRepository articuloTransaccionRepository;
 
     @Override
     public List<TransaccionDTO> findAll() {
@@ -32,5 +39,24 @@ public class TransaccionServiceImpl implements TransaccionService {
 
         return listaTransaccionDTO;
     }
+
+    @Override
+    public List<ArticuloTransaccionDTO> findByArticulo(ArticuloDTO articuloDTO) {
+        log.info(ArticuloTransaccionRepository.class.getSimpleName() + "  -- Cambio a dto");
+
+        List<ArticuloTransaccion> listaArticuloTransaccion = articuloTransaccionRepository.findByArticulo(articuloDTO.getId());
+        List<ArticuloTransaccionDTO> listaArticuloTransaccionDTO = new ArrayList<ArticuloTransaccionDTO>();
+        for (ArticuloTransaccion a : listaArticuloTransaccion) {
+            listaArticuloTransaccionDTO.add(ArticuloTransaccionDTO.convertToDTO(a));
+        }   
+
+        
+        
+
+        return listaArticuloTransaccionDTO;
+        
+    }
+
+    
 
 }

@@ -28,6 +28,7 @@
 							<td th:text="${articuloDTO.marca}"></td>
 							<td th:text="${articuloDTO.color}"></td>
 							<td th:text="${articuloDTO.material}"></td>
+							<td><a th:href="@{/articulos/{idArticulo}/transacciones (idArticulo=${articuloDTO.id})}">Ver transacciones</a></td>
 					<!--<td th:text="${articuloDTO.usuario.getId()}"></td>-->		
 						</tr>
 					</tbody>	
