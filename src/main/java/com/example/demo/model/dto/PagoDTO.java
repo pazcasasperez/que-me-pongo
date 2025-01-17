@@ -1,5 +1,6 @@
 package com.example.demo.model.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +11,8 @@ import com.example.demo.repository.entity.Transaccion;
 import lombok.Data;
 
 @Data
-public class PagoDTO {
+public class PagoDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String tipo;
 	private String numeroTarjeta;
