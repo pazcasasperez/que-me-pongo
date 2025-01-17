@@ -33,6 +33,7 @@ public class ArticuloUsuarioDTO {
 	//Conversiones
 	public static ArticuloUsuarioDTO convertToDTO(ArticuloUsuario au) {
 		ArticuloUsuarioDTO auDTO = new ArticuloUsuarioDTO();
+		auDTO.setId(au.getId());
 		auDTO.setArticulo( ArticuloDTO.convertToDTO(au.getArticulo()));
 		auDTO.setUsuario(UsuarioDTO.convertToDTO(au.getUsuario()));
 		
@@ -43,7 +44,7 @@ public class ArticuloUsuarioDTO {
 	
 	public static ArticuloUsuario convertToEntity(ArticuloUsuarioDTO auDTO) {
 		ArticuloUsuario au = new ArticuloUsuario();
-		
+		au.setId(auDTO.getId());
 		au.setArticulo( ArticuloDTO.convertToEntity(auDTO.getArticulo()));
 		au.setUsuario(UsuarioDTO.convertToEntity(auDTO.getUsuario()));
 		
