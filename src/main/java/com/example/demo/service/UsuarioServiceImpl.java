@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.repository.dao.UsuarioRepository;
 import com.example.demo.repository.entity.Usuario;
+import com.example.demo.service.mapper.ArticuloMapper;
+import com.example.demo.service.mapper.UsuarioMapper;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
@@ -28,7 +30,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 		List<UsuarioDTO> listarUsuarioDTO = new ArrayList<UsuarioDTO>();
 		List<Usuario> listarUsuario = usuarioRepository.findAll();
 		for(Usuario a : listarUsuario) {
-			listarUsuarioDTO.add(UsuarioDTO.convertToDTO(a));
+			listarUsuarioDTO.add(UsuarioMapper.INSTACE.toDTO(a));
+			//listarUsuarioDTO.add(UsuarioDTO.convertToDTO(a));
 		}
 		
 		return listarUsuarioDTO;

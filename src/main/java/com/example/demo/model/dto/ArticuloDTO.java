@@ -58,7 +58,7 @@ public class ArticuloDTO implements Serializable {
 		articuloDTO.setTipoAlmacenamiento(articulo.getTipoAlmacenamiento());
 		articuloDTO.setEstampado(articulo.getEstampado());
 		
-		articuloDTO.setUsuario(UsuarioDTO.convertToDTO(articulo.getUsuario()));
+		//articuloDTO.setUsuario(UsuarioDTO.convertToDTO(articulo.getUsuario()));
 		
 		// Conversion de la lista ArticuloTransaccion
 		
@@ -91,7 +91,7 @@ public class ArticuloDTO implements Serializable {
 		articulo.setTipoAlmacenamiento(articuloDTO.getTipoAlmacenamiento());
 		articulo.setEstampado(articuloDTO.getEstampado());
 		
-		articulo.setUsuario(UsuarioDTO.convertToEntity(articuloDTO.getUsuario()));
+		//articulo.setUsuario(UsuarioDTO.convertToEntity(articuloDTO.getUsuario()));
 		
 		// Conversion de la lista ArticuloTransaccion
 		

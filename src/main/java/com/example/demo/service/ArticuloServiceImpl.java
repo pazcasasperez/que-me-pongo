@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.ArticuloDTO;
 import com.example.demo.repository.dao.ArticuloRepository;
 import com.example.demo.repository.entity.Articulo;
+import com.example.demo.service.mapper.ArticuloMapper;
 
 @Service
 public class ArticuloServiceImpl implements ArticuloService {
 	@Autowired
 	private ArticuloRepository articuloRepository;
 	private static final Logger log = LoggerFactory.getLogger(ArticuloServiceImpl.class);
+	private final ArticuloMapper articuloMapper = null;
 
 	@Override
 	public List<ArticuloDTO> findAll() {
@@ -25,7 +27,9 @@ public class ArticuloServiceImpl implements ArticuloService {
 		List<Articulo> listaArticulos = articuloRepository.findAll();
 		List<ArticuloDTO> listaArticulosDTO = new ArrayList<ArticuloDTO>();
 		for(Articulo a : listaArticulos) {
-			listaArticulosDTO.add(ArticuloDTO.convertToDTO(a));
+			ArticuloDTO art = ArticuloMapper.INSTACE.toDTO(a);
+			listaArticulosDTO.add(art);
+			//listaArticulosDTO.add(ArticuloDTO.convertToDTO(a));
 		}
 		
 		return listaArticulosDTO;
