@@ -2,6 +2,7 @@ package com.example.demo.service.mapper;
 
 import java.util.Set;
 
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -14,20 +15,16 @@ import com.example.demo.repository.entity.ArticuloTransaccion;
 
 @Mapper(componentModel = "spring")
 public interface ArticuloTransaccionMapper {
-	ArticuloTransaccionMapper INSTACE = Mappers.getMapper(ArticuloTransaccionMapper.class);
+	ArticuloTransaccionMapper INSTANCE = Mappers.getMapper(ArticuloTransaccionMapper.class);
+	@Named("toDTOT")
+	ArticuloTransaccionDTO toDTO(ArticuloTransaccion at); 
+	// Mapeo inverso (opcional) 
+	@Named("toEntityT")
+	ArticuloTransaccion oEntity(ArticuloTransaccionDTO atDTO);
 	
-	
-
-    ArticuloTransaccionDTO toDTO(ArticuloTransaccion at);
-
-    // Mapeo inverso (opcional)
-    ArticuloTransaccion toEntity(ArticuloTransaccionDTO atDTO);
-	
-    @Named("articulosTransaccionesToArticulosTransaccionesDTO")
-    @Mapping(target = "articuloDTO", source = "articulo", ignore = true)
-    @Mapping(target = "transaccionDTO",source = "transaccion", ignore = true)
+	@IterableMapping(qualifiedByName = "toDTOT")
 	Set<ArticuloTransaccionDTO> articulosTransaccionesToArticulosTransaccionesDTO(Set<ArticuloTransaccion> listaArticulosTransacciones);
-	
-	Set<ArticuloTransaccion> articulosTransaccionesDTOToArticulosTransacciones(Set<ArticuloTransaccionDTO> listaArticulosTransaccionesDTO);
 
+	@IterableMapping(qualifiedByName = "toEntityT")
+	Set<ArticuloTransaccion> articulosTransaccionesDTOToArticulosTransacciones(Set<ArticuloTransaccionDTO> listaArticulosTransaccionesDTO);
 }

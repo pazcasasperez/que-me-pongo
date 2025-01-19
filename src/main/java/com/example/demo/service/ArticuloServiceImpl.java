@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +19,23 @@ public class ArticuloServiceImpl implements ArticuloService {
 	@Autowired
 	private ArticuloRepository articuloRepository;
 	private static final Logger log = LoggerFactory.getLogger(ArticuloServiceImpl.class);
-	private final ArticuloMapper articuloMapper = null;
+	@Autowired
+	private final ArticuloMapper articuloMapper=null;
 
 	@Override
 	public List<ArticuloDTO> findAll() {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos la lista de articulos al servicio");
 		
-		List<Articulo> listaArticulos = articuloRepository.findAll();
+		List<Articulo> listaArticulos = articuloRepository.findAll();/*
 		List<ArticuloDTO> listaArticulosDTO = new ArrayList<ArticuloDTO>();
 		for(Articulo a : listaArticulos) {
-			ArticuloDTO art = ArticuloMapper.INSTACE.toDTO(a);
+			ArticuloDTO art =articuloMapper.toDTO(a);
+			//ArticuloDTO art = ArticuloMapper.INSTANCE.toDTO(a);
 			listaArticulosDTO.add(art);
 			//listaArticulosDTO.add(ArticuloDTO.convertToDTO(a));
-		}
-		
-		return listaArticulosDTO;
+		}*/
+		return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
+		//return listaArticulosDTO;
 	}
 
 	@Override
