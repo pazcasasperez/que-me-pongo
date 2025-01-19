@@ -44,20 +44,30 @@ public class Articulo {
 	@Column(name = "tipo_almacenamiento")
 	private String tipoAlmacenamiento;
 	private String estampado;
-/*
+
 	
 	
 	//Relaciones
+	// Relacion tiene - Articulo  ---> Usuario
 	@ManyToOne 
 	@JoinColumn(name="id_usuario")
 	@ToString.Exclude
-  private Usuario usuario;
+  	private Usuario usuario;
 	
-*/
-
+	// Relacion tiene - Articulo  ---> ArticuloTransaccion
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
-	 @ToString.Exclude
-	 private Set<ArticuloTransaccion> listaArticulosTransaccion;
+	@ToString.Exclude
+	private Set<ArticuloTransaccion> listaArticulosTransaccion;
+	
+	// Relacion tiene - Articulo ---> Vender
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
+	@ToString.Exclude
+	private Set<Venta> listaVentas;
+	
+	// Relacion tiene - Articulo ---> Vender
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
+	@ToString.Exclude
+	private Set<Compra> listaCompras;
 
 
 	// Equals y hash

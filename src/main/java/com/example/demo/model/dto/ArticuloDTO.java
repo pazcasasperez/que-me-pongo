@@ -1,14 +1,17 @@
 package com.example.demo.model.dto;
 
+import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 import com.example.demo.repository.entity.Articulo;
 
 import lombok.Data;
 
 @Data
-public class ArticuloDTO {
+public class ArticuloDTO implements Serializable {
 	//Atributos
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String color;
 	private String marca;
@@ -27,25 +30,12 @@ public class ArticuloDTO {
 	private String capacidad;
 	private String tipoAlmacenamiento;
 	private String estampado;
-	// private UsuarioDTO usuario;
+	private UsuarioDTO usuario;
+	private Set<ArticuloTransaccionDTO> listaArticulosTransaccion;
+	private Set<VentaDTO> listaVentas;
+	private Set<CompraDTO> listaCompras;
 	
-	//Hash y equals
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ArticuloDTO other = (ArticuloDTO) obj;
-		return Objects.equals(id, other.id);
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-	
+
 	//Conversiones
 	public static ArticuloDTO convertToDTO(Articulo articulo) {
 		ArticuloDTO articuloDTO = new ArticuloDTO();
@@ -67,6 +57,14 @@ public class ArticuloDTO {
 		articuloDTO.setCapacidad(articulo.getCapacidad());
 		articuloDTO.setTipoAlmacenamiento(articulo.getTipoAlmacenamiento());
 		articuloDTO.setEstampado(articulo.getEstampado());
+		
+		//articuloDTO.setUsuario(UsuarioDTO.convertToDTO(articulo.getUsuario()));
+		
+		// Conversion de la lista ArticuloTransaccion
+		
+		//Conversio de la lista Vetas
+		
+		//Conversion de la lista Compras
 		
 		
 		return articuloDTO;
@@ -93,6 +91,32 @@ public class ArticuloDTO {
 		articulo.setTipoAlmacenamiento(articuloDTO.getTipoAlmacenamiento());
 		articulo.setEstampado(articuloDTO.getEstampado());
 		
+		//articulo.setUsuario(UsuarioDTO.convertToEntity(articuloDTO.getUsuario()));
+		
+		// Conversion de la lista ArticuloTransaccion
+		
+		//Conversio de la lista Vetas
+				
+		//Conversion de la lista Compras
+		
 		return articulo;
 	}
+	
+	//Hash y equals
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ArticuloDTO other = (ArticuloDTO) obj;
+		return Objects.equals(id, other.id);
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	
 }

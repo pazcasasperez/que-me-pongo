@@ -1,16 +1,25 @@
 package com.example.demo.model.dto;
 
+import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 import com.example.demo.repository.entity.Direccion;
+import com.example.demo.repository.entity.Transaccion;
+import com.example.demo.repository.entity.UsuarioDireccion;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
-public class DireccionDTO {
+public class DireccionDTO implements Serializable{
 
 	// Atributos
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String via;
 	private String nombre;
@@ -31,6 +40,12 @@ public class DireccionDTO {
 	private String personaContactoPuntoRecogida;
 
 	// Relaciones
+	private Set<UsuarioDireccionDTO> listaUsuarioDireccion;
+	//Direccion ---> Transaccion
+	private Set<TransaccionDTO> listaTransaccionesEnvios;
+	 
+	//Direccion ---> Transaccion
+	private Set<TransaccionDTO> listaTransaccionesVendedores;
 
 	// HashCode y equals
 	@Override
