@@ -24,8 +24,8 @@ public class PagoDTO implements Serializable{
 	
 	//Relaciones
 	
-	private List<Transaccion> transaccionRecibida = new ArrayList<Transaccion>();
-	private List<Transaccion> transaccionRealizada = new ArrayList<Transaccion>();
+	private List<TransaccionDTO> transaccionRecibida = new ArrayList<TransaccionDTO>();
+	private List<TransaccionDTO> transaccionRealizada = new ArrayList<TransaccionDTO>();
 	
 	// Conversiones
 	public static PagoDTO convertToDTO(Pago pago) {
