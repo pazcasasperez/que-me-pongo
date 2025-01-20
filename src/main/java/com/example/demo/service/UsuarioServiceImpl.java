@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,4 +38,25 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return listarUsuarioDTO;
 	}
 
+	@Override
+	public UsuarioDTO findById(UsuarioDTO usuarioDTO) {
+
+		log.info(UsuarioServiceImpl.class.getName()+ " - Buscamos el cliente por el id");
+
+		Optional<Usuario> usuario = usuarioRepository.findById(usuarioDTO.getId());
+		if (usuario.isPresent()) {
+			usuarioDTO = UsuarioDTO.convertToDTO(usuario.get());
+			return usuarioDTO;
+		}		
+		return null;
+	}
+	/*
+	@Override
+	public void save(UsuarioDTO usuarioDTO) {
+		
+		log.info(UsuarioServiceImpl.class.getName()+ " - Guardamos el usuario");
+		
+		Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
+		usuarioRepository.save(usuario);
+	}*/
 }

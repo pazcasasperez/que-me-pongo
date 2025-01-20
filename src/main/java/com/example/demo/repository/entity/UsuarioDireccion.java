@@ -22,6 +22,7 @@ public class UsuarioDireccion {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	private boolean predeterminada;
 	
 	@ManyToOne
 	@JoinColumn(name="id_usuario")
