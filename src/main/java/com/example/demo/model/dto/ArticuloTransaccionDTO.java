@@ -1,5 +1,7 @@
 package com.example.demo.model.dto;
 
+import java.io.Serializable;
+
 import com.example.demo.repository.entity.ArticuloTransaccion;
 
 import jakarta.persistence.GeneratedValue;
@@ -8,14 +10,13 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-public class ArticuloTransaccionDTO {
+public class ArticuloTransaccionDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private static final long serialVersionUID = 1L;
     private Long id;
 
-    private Long idArticulo;
-    private Long idTransaccion;
+    private ArticuloDTO articuloDTO;
+    private TransaccionDTO transaccionDTO;
     private double precioVenta;
     private double precioFinal;
 
@@ -23,10 +24,11 @@ public class ArticuloTransaccionDTO {
         ArticuloTransaccionDTO articulosTransaccionDTO = new ArticuloTransaccionDTO();
 
         articulosTransaccionDTO.setId(articulosTransaccion.getId());
-        //articulosTransaccionDTO.setIdArticulo(articulosTransaccion.getIdArticulo());
-        //articulosTransaccionDTO.setIdTransaccion(articulosTransaccion.getIdTransaccion());
         articulosTransaccionDTO.setPrecioVenta(articulosTransaccion.getPrecioVenta());
         articulosTransaccionDTO.setPrecioFinal(articulosTransaccion.getPrecioFinal());
+
+        articulosTransaccionDTO.setArticuloDTO(ArticuloDTO.convertToDTO(articulosTransaccion.getArticulo()));
+        articulosTransaccionDTO.setTransaccionDTO(TransaccionDTO.convertToDTO(articulosTransaccion.getTransaccion()));
 
         return articulosTransaccionDTO;
     }
@@ -35,10 +37,12 @@ public class ArticuloTransaccionDTO {
         ArticuloTransaccion articulosTransaccion = new ArticuloTransaccion();
 
         articulosTransaccion.setId(articulosTransaccionDTO.getId());
-        //articulosTransaccion.setIdArticulo(articulosTransaccionDTO.getIdArticulo());
-        //articulosTransaccion.setIdTransaccion(articulosTransaccionDTO.getIdTransaccion());
+        
         articulosTransaccion.setPrecioVenta(articulosTransaccionDTO.getPrecioVenta());
         articulosTransaccion.setPrecioFinal(articulosTransaccionDTO.getPrecioFinal());
+
+        articulosTransaccion.setArticulo(ArticuloDTO.convertToEntity(articulosTransaccionDTO.getArticuloDTO()));
+        articulosTransaccion.setTransaccion(TransaccionDTO.convertToEntity(articulosTransaccionDTO.getTransaccionDTO()));
 
         return articulosTransaccion;
     }

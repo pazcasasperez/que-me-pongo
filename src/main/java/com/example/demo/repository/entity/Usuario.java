@@ -11,6 +11,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -38,11 +40,26 @@ public class Usuario {
 	private String plan;
 	private String rol;
 	
+	// relacion usuario --> articulo
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
+	@ToString.Exclude
+  	private Set<Articulo> listaArticulos;
+	
 	
 	// Mapeamos con la entidad UsuarioDireccion
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
 	@ToString.Exclude
 	private Set<UsuarioDireccion> listaUsuarioDireccion;
+	
+	// Relacion tiene - Usuario ---> Vender
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
+	@ToString.Exclude
+	private Set<Venta> listaVentas;
+	
+	// Relacion tiene - Usuario ---> Vender
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
+	@ToString.Exclude
+	private Set<Compra> listaCompras;
 	
 	// Hash y equals
 	@Override

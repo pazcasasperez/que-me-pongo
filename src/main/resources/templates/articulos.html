@@ -19,6 +19,7 @@
 							<td>Color</td>
 							<td>Material</td>
 							<td>Id usuario</td>
+							<td> Ver transacciones</td>
 						</tr>
 					</thead> <!-- Fin cabecera -->
 					<tbody>
@@ -28,7 +29,9 @@
 							<td th:text="${articuloDTO.marca}"></td>
 							<td th:text="${articuloDTO.color}"></td>
 							<td th:text="${articuloDTO.material}"></td>
-					<!--<td th:text="${articuloDTO.usuario.getId()}"></td>-->		
+				 	<td th:text="${articuloDTO.usuario.getId()}"></td>	
+							<td><a th:href="@{/articulos/{idArticulo}/transacciones (idArticulo=${articuloDTO.id})}">Ver transacciones</a></td>
+							
 						</tr>
 					</tbody>	
 				</table>

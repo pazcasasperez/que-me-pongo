@@ -1,20 +1,30 @@
 package com.example.demo.model.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import com.example.demo.repository.entity.Articulo;
+import com.example.demo.repository.entity.Compra;
 import com.example.demo.repository.entity.Usuario;
+import com.example.demo.repository.entity.UsuarioDireccion;
+import com.example.demo.repository.entity.Venta;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.ToString;
 
 @Data
-public class UsuarioDTO {
+public class UsuarioDTO implements Serializable{
 	
 	// Atributos
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String nombre;
 	private String apellidos;
@@ -31,6 +41,10 @@ public class UsuarioDTO {
 	private String rol;
 	
 	// Relaciones
+  	private Set<Articulo> listaArticulos;
+	private Set<UsuarioDireccion> listaUsuarioDireccion;
+	private Set<Venta> listaVentas;
+	private Set<Compra> listaCompras;
 
 	
 	// HashCode y equals

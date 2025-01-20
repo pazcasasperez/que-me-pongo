@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.repository.dao.UsuarioRepository;
 import com.example.demo.repository.entity.Usuario;
+import com.example.demo.service.mapper.ArticuloMapper;
+import com.example.demo.service.mapper.UsuarioMapper;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
@@ -28,10 +31,32 @@ public class UsuarioServiceImpl implements UsuarioService{
 		List<UsuarioDTO> listarUsuarioDTO = new ArrayList<UsuarioDTO>();
 		List<Usuario> listarUsuario = usuarioRepository.findAll();
 		for(Usuario a : listarUsuario) {
-			listarUsuarioDTO.add(UsuarioDTO.convertToDTO(a));
+			listarUsuarioDTO.add(UsuarioMapper.INSTACE.toDTO(a));
+			//listarUsuarioDTO.add(UsuarioDTO.convertToDTO(a));
 		}
 		
 		return listarUsuarioDTO;
 	}
 
+	@Override
+	public UsuarioDTO findById(UsuarioDTO usuarioDTO) {
+
+		log.info(UsuarioServiceImpl.class.getName()+ " - Buscamos el cliente por el id");
+
+		Optional<Usuario> usuario = usuarioRepository.findById(usuarioDTO.getId());
+		if (usuario.isPresent()) {
+			usuarioDTO = UsuarioDTO.convertToDTO(usuario.get());
+			return usuarioDTO;
+		}		
+		return null;
+	}
+	/*
+	@Override
+	public void save(UsuarioDTO usuarioDTO) {
+		
+		log.info(UsuarioServiceImpl.class.getName()+ " - Guardamos el usuario");
+		
+		Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
+		usuarioRepository.save(usuario);
+	}*/
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.DireccionDTO;
 import com.example.demo.repository.dao.DireccionRepository;
 import com.example.demo.repository.entity.Direccion;
+import com.example.demo.service.mapper.DireccionMapper;
 import com.example.demo.web.controller.DireccionController;
 
 @Service
@@ -29,7 +30,8 @@ public class DireccionServiceImpl implements DireccionService{
 		List<Direccion> listaDireccion = direccionRepository.findAll();
 		List<DireccionDTO> listaDireccionDTO = new ArrayList<>();
 		for(Direccion d : listaDireccion) {
-			listaDireccionDTO.add(DireccionDTO.convertToDTO(d));
+			listaDireccionDTO.add(DireccionMapper.INSTACE.toDTO(d));
+			//listaDireccionDTO.add(DireccionDTO.convertToDTO(d));
 		}
 		
 		return listaDireccionDTO;

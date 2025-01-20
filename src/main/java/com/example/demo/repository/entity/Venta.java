@@ -1,8 +1,8 @@
 package com.example.demo.repository.entity;
 
+import java.util.Date;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,32 +10,39 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @Entity
-@Table(name="usuariosdirecciones")
-public class UsuarioDireccion {
-
-	//Atributos y primera parte de la relación
+@Table(name="ventas")
+public class Venta {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private boolean predeterminada;
 	
-	@ManyToOne
+	@ManyToOne 
 	@JoinColumn(name="id_usuario")
 	@ToString.Exclude
 	private Usuario usuario;
 	
-	@ManyToOne
-	@JoinColumn(name="id_direccion")
+	@ManyToOne 
+	@JoinColumn(name="id_articulo")
 	@ToString.Exclude
-	private Direccion direccion;
-
-	// HashCode y equals
-	// Añadimos el getId porque no interesa comparar los ids !!!!
+	private Articulo articulo;
+	
+	@ManyToOne 
+	@JoinColumn(name="id_transaccion")
+	@ToString.Exclude
+	private Transaccion transaccion;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fecha;
+	
+	
+	//EQUALS y HASH
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -44,13 +51,15 @@ public class UsuarioDireccion {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UsuarioDireccion other = (UsuarioDireccion) obj;
-		return Objects.equals(direccion.getId(), other.direccion.getId())
-				&& Objects.equals(usuario.getId(), other.usuario.getId());
+		Venta other = (Venta) obj;
+		return Objects.equals(id, other.id);
 	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(direccion.getId(), usuario.getId());
-	}	
+		return Objects.hash(id);
+	}
+	
+	
+	
+
 }
