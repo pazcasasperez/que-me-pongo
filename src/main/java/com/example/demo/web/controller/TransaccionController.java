@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.ArticuloDTO;
@@ -18,7 +20,8 @@ import com.example.demo.service.ArticuloService;
 import com.example.demo.service.TransaccionService;
 
 
-@Controller
+@RestController
+@RequestMapping("/api/transacciones")
 public class TransaccionController {
 	@Autowired
 	private TransaccionService transaccionService;
@@ -26,15 +29,16 @@ public class TransaccionController {
 	private ArticuloService articuloService;
 	private static final Logger log = LoggerFactory.getLogger(ArticuloController.class);
 
-	@GetMapping("/transacciones")
-	public ModelAndView findAll() {
+	//@GetMapping("/transacciones")
+	@GetMapping
+	public List<TransaccionDTO> findAll() {
 		log.info(TransaccionController.class.getSimpleName() + "  -- Listando todas las transacciones");
 
-		ModelAndView mav = new ModelAndView("transacciones");
+		//ModelAndView mav = new ModelAndView("transacciones");
 		List<TransaccionDTO> listaTransaccionesDTO = transaccionService.findAll();
 
-		mav.addObject("listaTransaccionesDTO", listaTransaccionesDTO);
-		return mav;
+		//mav.addObject("listaTransaccionesDTO", listaTransaccionesDTO);
+		return listaTransaccionesDTO;
 	}
 
 	@GetMapping("/articulos/{idArticulo}/transacciones")
