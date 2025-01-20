@@ -3,7 +3,6 @@ package com.example.demo.repository.entity;
 import java.util.Date;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,8 +17,8 @@ import lombok.ToString;
 
 @Data
 @Entity
-@Table(name="articulosusuarios")
-public class ArticuloUsuario {
+@Table(name="ventas")
+public class Venta {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -34,6 +33,11 @@ public class ArticuloUsuario {
 	@ToString.Exclude
 	private Articulo articulo;
 	
+	@ManyToOne 
+	@JoinColumn(name="id_transaccion")
+	@ToString.Exclude
+	private Transaccion transaccion;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
 	
@@ -47,7 +51,7 @@ public class ArticuloUsuario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ArticuloUsuario other = (ArticuloUsuario) obj;
+		Venta other = (Venta) obj;
 		return Objects.equals(id, other.id);
 	}
 	@Override

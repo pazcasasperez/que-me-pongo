@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.PagoDTO;
 import com.example.demo.repository.dao.PagoRepository;
 import com.example.demo.repository.entity.Pago;
+import com.example.demo.service.mapper.PagoMapper;
 
 @Service
 public class PagoServiceImpl implements PagoService {
@@ -27,7 +28,8 @@ public class PagoServiceImpl implements PagoService {
 		List<PagoDTO> listaPagosDTO = new ArrayList<PagoDTO>();
 		log.info("             cantidad pagos " + listaPagos.size());
 		for(Pago p : listaPagos) {
-			listaPagosDTO.add(PagoDTO.convertToDTO(p));
+			listaPagosDTO.add(PagoMapper.INSTACE.toDTO(p));
+			//listaPagosDTO.add(PagoDTO.convertToDTO(p));
 		}
 		
 		return listaPagosDTO;

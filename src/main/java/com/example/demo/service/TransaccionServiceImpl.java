@@ -15,6 +15,8 @@ import com.example.demo.repository.dao.ArticuloTransaccionRepository;
 import com.example.demo.repository.dao.TransaccionRepository;
 import com.example.demo.repository.entity.ArticuloTransaccion;
 import com.example.demo.repository.entity.Transaccion;
+import com.example.demo.service.mapper.PagoMapper;
+import com.example.demo.service.mapper.TransaccionMapper;
 import com.example.demo.web.controller.ArticuloController;
 
 @Service
@@ -34,6 +36,7 @@ public class TransaccionServiceImpl implements TransaccionService {
         List<Transaccion> listaTransaccion = transaccionRepository.findAll();
         List<TransaccionDTO> listaTransaccionDTO = new ArrayList<TransaccionDTO>();
         for (Transaccion a : listaTransaccion) {
+        	//listaTransaccionDTO.add(TransaccionMapper.INSTACE.toDTO(a));
             listaTransaccionDTO.add(TransaccionDTO.convertToDTO(a));
         }
 

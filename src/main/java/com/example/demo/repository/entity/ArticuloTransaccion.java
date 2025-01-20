@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "articulostransaccion")
+@Table(name = "articulostransacciones")
 public class ArticuloTransaccion {
 
     @Id

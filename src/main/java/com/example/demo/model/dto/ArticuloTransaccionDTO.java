@@ -1,5 +1,7 @@
 package com.example.demo.model.dto;
 
+import java.io.Serializable;
+
 import com.example.demo.repository.entity.ArticuloTransaccion;
 
 import jakarta.persistence.GeneratedValue;
@@ -8,10 +10,9 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-public class ArticuloTransaccionDTO {
+public class ArticuloTransaccionDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private static final long serialVersionUID = 1L;
     private Long id;
 
     private ArticuloDTO articuloDTO;
