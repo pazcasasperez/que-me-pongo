@@ -15,8 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.service.UsuarioService;
 
-@RestController
-@RequestMapping("/api/usuarios")
+//@RestController
+//@RequestMapping("/api/usuarios")
+@Controller
 public class UsuarioController {
 
 	private static final Logger log = LoggerFactory.getLogger(UsuarioController.class);
@@ -25,17 +26,17 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	//@GetMapping("/usuarios")
-	@GetMapping
-	public List<UsuarioDTO> findAll() {
+	@GetMapping("/usuarios")
+	//@GetMapping
+	public ModelAndView findAll() {
 		log.info(UsuarioController.class.getSimpleName() + " - listamos todos los usuarios");
 
-		//ModelAndView mv = new ModelAndView("usuarios");
+		ModelAndView mv = new ModelAndView("usuarios");
 		List<UsuarioDTO> listaUsuarioDTO = usuarioService.findAll();
 
-		//mv.addObject("listaUsuarioDTO", listaUsuarioDTO);
-		//return mv;
-		return listaUsuarioDTO;
+		mv.addObject("listaUsuarioDTO", listaUsuarioDTO);
+		return mv;
+		//return listaUsuarioDTO;
 	}
 
 	@GetMapping("/usuarios/add")

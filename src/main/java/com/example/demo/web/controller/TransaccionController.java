@@ -20,8 +20,9 @@ import com.example.demo.service.ArticuloService;
 import com.example.demo.service.TransaccionService;
 
 
-@RestController
-@RequestMapping("/api/transacciones")
+//@RestController
+//@RequestMapping("/api/transacciones")
+@Controller
 public class TransaccionController {
 	@Autowired
 	private TransaccionService transaccionService;
@@ -29,16 +30,17 @@ public class TransaccionController {
 	private ArticuloService articuloService;
 	private static final Logger log = LoggerFactory.getLogger(ArticuloController.class);
 
-	//@GetMapping("/transacciones")
-	@GetMapping
-	public List<TransaccionDTO> findAll() {
+	@GetMapping("/transacciones")
+	//@GetMapping
+	public ModelAndView findAll() {
 		log.info(TransaccionController.class.getSimpleName() + "  -- Listando todas las transacciones");
 
-		//ModelAndView mav = new ModelAndView("transacciones");
+		ModelAndView mav = new ModelAndView("transacciones");
 		List<TransaccionDTO> listaTransaccionesDTO = transaccionService.findAll();
 
-		//mav.addObject("listaTransaccionesDTO", listaTransaccionesDTO);
-		return listaTransaccionesDTO;
+		mav.addObject("listaTransaccionesDTO", listaTransaccionesDTO);
+		//return listaTransaccionesDTO;
+		return mav;
 	}
 
 	@GetMapping("/articulos/{idArticulo}/transacciones")
