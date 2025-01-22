@@ -2,7 +2,9 @@ package com.example.demo.service.mapper;
 
 import java.util.Set;
 
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import com.example.demo.model.dto.PagoDTO;
@@ -19,6 +21,6 @@ public interface UsuarioDireccionMapper {
 	UsuarioDireccion toEntity(UsuarioDireccionDTO udDTO);
 	
 	Set<UsuarioDireccionDTO> usuariosDireccionesToUsuariosDireccionesDTO(Set<UsuarioDireccion> listaUsuariosDirecciones);
-	
-	Set<UsuarioDireccion> usuariosDireccionesDTOToUsuariosDirecciones(Set<PagoDTO> listaUsuariosDireccionesDTO);
+
+	Set<UsuarioDireccion> usuariosDireccionesDTOToUsuariosDirecciones(Set<UsuarioDireccionDTO> listaUsuariosDireccionesDTO);
 }
