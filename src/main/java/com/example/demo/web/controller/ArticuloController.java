@@ -30,4 +30,13 @@ public class ArticuloController {
 		mav.addObject("listaArticulosDTO", listaArticulosDTO);
 		return mav;
 	}
+	
+	@GetMapping("/articulos/add")
+	public ModelAndView add() {
+		log.info(ArticuloController.class.getSimpleName() + "  -- Añadir un articulo");
+		
+		ModelAndView mav = new ModelAndView("articulosform");
+		
+		return mav;
+	}
 }
