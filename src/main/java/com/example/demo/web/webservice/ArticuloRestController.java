@@ -1,4 +1,4 @@
-package com.example.demo.web.controller;
+package com.example.demo.web.webservice;
 
 import java.util.List;
 
