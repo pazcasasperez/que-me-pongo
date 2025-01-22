@@ -30,8 +30,8 @@ public class DireccionServiceImpl implements DireccionService{
 		List<Direccion> listaDireccion = direccionRepository.findAll();
 		List<DireccionDTO> listaDireccionDTO = new ArrayList<>();
 		for(Direccion d : listaDireccion) {
-			listaDireccionDTO.add(DireccionMapper.INSTACE.toDTO(d));
-			//listaDireccionDTO.add(DireccionDTO.convertToDTO(d));
+			//listaDireccionDTO.add(DireccionMapper.INSTACE.toDTO(d));
+			listaDireccionDTO.add(DireccionDTO.convertToDTO(d));
 		}
 		
 		return listaDireccionDTO;
