@@ -49,7 +49,7 @@ public class TransaccionController {
 
 		ArticuloDTO articuloDTO = new ArticuloDTO();
 		articuloDTO.setId(idArticulo);
-		articuloDTO = articuloService.findById(idArticulo);
+		articuloDTO = articuloService.findById(articuloDTO);
 
 		log.info("articulo " + articuloDTO.toString());
 		
