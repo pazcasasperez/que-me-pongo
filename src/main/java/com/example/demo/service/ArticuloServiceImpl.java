@@ -34,18 +34,32 @@ public class ArticuloServiceImpl implements ArticuloService {
 			listaArticulosDTO.add(art);
 			//listaArticulosDTO.add(ArticuloDTO.convertToDTO(a));
 		}*/
+		//listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toSet());
 		return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
 		//return listaArticulosDTO;
 	}
 
 	@Override
-	public ArticuloDTO findById(Long idArticulo) {
-		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos el articulo con id " + idArticulo + " al servicio");
-		
-		Articulo a = articuloRepository.findById(idArticulo).get();
-		ArticuloDTO articuloDTO = ArticuloDTO.convertToDTO(a);
+	public ArticuloDTO findById(ArticuloDTO articuloDTO) {
+		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos el articulo con id " + articuloDTO.getId() + " al servicio");
+
+		Articulo a = articuloRepository.findById(articuloDTO.getId()).get();
+		articuloDTO = ArticuloDTO.convertToDTO(a);
 		
 		return articuloDTO;
 	}
-
+	/**
+	 *  Vamos a guardar el articulo, como hemos realizado hasta ahora, pero devolveremos
+	 *  un articulo al controlador, para poder controlar el error
+	 */
+	@Override
+	public ArticuloDTO save(ArticuloDTO articuloDTO) {
+		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Guardamos en el servicio un nuevo articulo");
+		log.info("ArticuloDTO " + articuloDTO.toString());
+		Articulo articulo = ArticuloMapper.INSTANCE.toEntity(articuloDTO);
+		Articulo art = articuloRepository.save(articulo);
+		articuloDTO = ArticuloMapper.INSTANCE.toDTO(art);
+		log.info("ArticuloDTO MYSQL" + articuloDTO.toString());
+		return articuloDTO ;
+	}
 }

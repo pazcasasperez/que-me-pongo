@@ -8,6 +8,8 @@ public interface ArticuloService {
 
 	List<ArticuloDTO> findAll();
 
-    ArticuloDTO findById(Long idArticulo);
+	ArticuloDTO save(ArticuloDTO articuloDTO);
+
+	ArticuloDTO findById(ArticuloDTO articuloDTO);
 
 }
