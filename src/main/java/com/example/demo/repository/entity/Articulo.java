@@ -41,6 +41,7 @@ public class Articulo {
 	private String largo;
 	private String grosor;
 	private String capacidad;
+	private double precio;
 	@Column(name = "tipo_almacenamiento")
 	private String tipoAlmacenamiento;
 	private String estampado;
