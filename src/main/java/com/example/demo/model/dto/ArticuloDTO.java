@@ -58,6 +58,7 @@ public class ArticuloDTO implements Serializable {
 		articuloDTO.setCapacidad(articulo.getCapacidad());
 		articuloDTO.setTipoAlmacenamiento(articulo.getTipoAlmacenamiento());
 		articuloDTO.setEstampado(articulo.getEstampado());
+		articuloDTO.setPrecio(articulo.getPrecio());
 		
 		//articuloDTO.setUsuario(UsuarioDTO.convertToDTO(articulo.getUsuario()));
 		
@@ -91,6 +92,7 @@ public class ArticuloDTO implements Serializable {
 		articulo.setCapacidad(articuloDTO.getCapacidad());
 		articulo.setTipoAlmacenamiento(articuloDTO.getTipoAlmacenamiento());
 		articulo.setEstampado(articuloDTO.getEstampado());
+		articulo.setPrecio(articuloDTO.getPrecio());
 		
 		//articulo.setUsuario(UsuarioDTO.convertToEntity(articuloDTO.getUsuario()));
 		
