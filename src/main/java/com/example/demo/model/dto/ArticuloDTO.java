@@ -30,6 +30,7 @@ public class ArticuloDTO implements Serializable {
 	private String capacidad;
 	private String tipoAlmacenamiento;
 	private String estampado;
+	private double precio;
 	private UsuarioDTO usuario;
 	private Set<ArticuloTransaccionDTO> listaArticulosTransaccion;
 	private Set<VentaDTO> listaVentas;

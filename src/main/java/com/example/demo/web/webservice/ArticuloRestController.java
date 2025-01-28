@@ -5,6 +5,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.dto.ArticuloDTO;
@@ -20,11 +22,65 @@ public class ArticuloRestController {
     private ArticuloService articuloService;
 
     // Obtener todos los artículos (GET)
-    @GetMapping
-    public List<ArticuloDTO> findAll() {
+    @GetMapping("")
+    public ResponseEntity<List<ArticuloDTO>> findAll() {
         log.info(ArticuloRestController.class.getSimpleName() + " -- Listando los artículos");
-        return articuloService.findAll();
+        List<ArticuloDTO> listaArticulosDTO = articuloService.findAll();
+        return new ResponseEntity<>(listaArticulosDTO, HttpStatus.OK);
     }
+    
+    @GetMapping("/{idArticulo}")
+    public ResponseEntity<ArticuloDTO> findById(@PathVariable("idArticulo") Long idArticulo) {
+        log.info(ArticuloRestController.class.getSimpleName() + " -- Listando el arituclo " + idArticulo);
+        ArticuloDTO articuloDTO = new ArticuloDTO();
+        articuloDTO.setId(idArticulo);
+        articuloDTO = articuloService.findById(articuloDTO);
+        //Compramos que el articulo no vuelve vacio
+        // si vuelve vacion, enviamos al front que no ha sido encontrado
+        if(articuloDTO==null) {
+        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        // Si lo hemos encontrado. Le devolvemos que se ha encontrado 
+        // y le mandamos el articulo
+        return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
+    }
+    // Faltaria pasarle el cliente, y meterlo en el articulo
+    @PostMapping("/add")
+    public ResponseEntity<ArticuloDTO> add(@RequestBody ArticuloDTO articuloDTO) {
+        log.info(ArticuloRestController.class.getSimpleName() + " -- Añadir un articulo ");
+        /**
+         * ClienteDTO clienteDTO = new ClienteDTO();
+        // clienteDTO.setId(idCliente);
+        // articuloDTO.setCliente(clienteDTO);
+         */
 
-   
+        
+        //Almacenamos la devolucion del guardado que nos envia el servicio para 
+        // poder comprobar que ha funcionado 
+        articuloDTO = articuloService.save(articuloDTO);
+        //Miro si lo q viene del service esta vacio o me devuelve el objeto insertado
+        //Si vuelve vacion mandamos un mensaje al front de que ha ido mal
+        if(articuloDTO==null) {
+        	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        // Si lo hemos insertadp. Le devolvemos que se ha insertado 
+        // y le mandamos el articulo
+        return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
+    }
+    @PutMapping("/update")
+    public ResponseEntity<ArticuloDTO> update(@RequestBody ArticuloDTO articuloDTO) {
+        log.info(ArticuloRestController.class.getSimpleName() + " -- Actualizamos el articulo " + articuloDTO.getId());
+        // Primero veremos si el articulo existe, para ello, lo buscaremos por medio del servicio
+        ArticuloDTO articuloExDTO = new ArticuloDTO();
+        articuloExDTO.setId(articuloDTO.getId());
+        articuloExDTO = articuloService.findById(articuloExDTO);
+        //una vez buscado en la bd, comprobamos si lo ha encontrado o no
+        // si no lo ha encontrado, mandamos un mensaje de no encontrado al front
+        if(articuloExDTO==null) {
+        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        // Si lo hemos actualizamos. Le devolvemos que se ha realizado la operacion
+        articuloDTO = articuloService.save(articuloDTO);
+        return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
+    }   
 }
