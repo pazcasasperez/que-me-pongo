@@ -16,15 +16,15 @@ import com.example.demo.repository.entity.ArticuloTransaccion;
 @Mapper(componentModel = "spring")
 public interface ArticuloTransaccionMapper {
 	ArticuloTransaccionMapper INSTANCE = Mappers.getMapper(ArticuloTransaccionMapper.class);
-	@Named("toDTOT")
+	@Named("toDTOAT")
 	ArticuloTransaccionDTO toDTO(ArticuloTransaccion at); 
 	// Mapeo inverso (opcional) 
-	@Named("toEntityT")
+	@Named("toEntityAT")
 	ArticuloTransaccion oEntity(ArticuloTransaccionDTO atDTO);
 	
-	@IterableMapping(qualifiedByName = "toDTOT")
+	@IterableMapping(qualifiedByName = "toDTOAT")
 	Set<ArticuloTransaccionDTO> articulosTransaccionesToArticulosTransaccionesDTO(Set<ArticuloTransaccion> listaArticulosTransacciones);
 
-	@IterableMapping(qualifiedByName = "toEntityT")
+	@IterableMapping(qualifiedByName = "toEntityAT")
 	Set<ArticuloTransaccion> articulosTransaccionesDTOToArticulosTransacciones(Set<ArticuloTransaccionDTO> listaArticulosTransaccionesDTO);
 }

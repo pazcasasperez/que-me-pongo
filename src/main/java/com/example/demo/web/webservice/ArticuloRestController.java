@@ -45,7 +45,7 @@ public class ArticuloRestController {
         return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
     }
     // Faltaria pasarle el cliente, y meterlo en el articulo
-    @PostMapping("/add")
+    @PostMapping("")
     public ResponseEntity<ArticuloDTO> add(@RequestBody ArticuloDTO articuloDTO) {
         log.info(ArticuloRestController.class.getSimpleName() + " -- Añadir un articulo ");
         /**
@@ -67,7 +67,7 @@ public class ArticuloRestController {
         // y le mandamos el articulo
         return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
     }
-    @PutMapping("/update")
+    @PutMapping("")
     public ResponseEntity<ArticuloDTO> update(@RequestBody ArticuloDTO articuloDTO) {
         log.info(ArticuloRestController.class.getSimpleName() + " -- Actualizamos el articulo " + articuloDTO.getId());
         // Primero veremos si el articulo existe, para ello, lo buscaremos por medio del servicio
@@ -83,4 +83,16 @@ public class ArticuloRestController {
         articuloDTO = articuloService.save(articuloDTO);
         return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
     }   
+    
+    
+    //En nuetro caso no borramoss, desactivamos el articulo
+    @DeleteMapping("/{idArticulo}")
+    public ResponseEntity<String> delete(@PathVariable("idArticulo") Long idArticulo){
+    	log.info(ArticuloRestController.class.getSimpleName() + " -- Borramos el articulo " + idArticulo);
+        ArticuloDTO articuloDTO = new ArticuloDTO();
+        articuloDTO.setId(idArticulo);
+        articuloService.delete(articuloDTO);
+    	
+    	return new ResponseEntity<>("Cliente borrado satisfactoriamente", HttpStatus.OK);
+    }
 }

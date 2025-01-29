@@ -16,12 +16,8 @@ public interface CompraMapper {
 	CompraMapper INSTANCE = Mappers.getMapper(CompraMapper.class);
 	
 	@Named("toDTOC")
-	@Mapping(target = "articulo", ignore = true)
-	@Mapping(target = "transaccion", ignore = true)
 	CompraDTO toDTO(Compra compra);
 	@Named("toEntityC")
-	@Mapping(target = "articulo", ignore = true)
-	@Mapping(target = "transaccion", ignore = true)
 	Compra toEntity(CompraDTO comprasDTO);
 	
 	@IterableMapping(qualifiedByName = "toDTOC")

@@ -11,6 +11,7 @@ import com.example.demo.repository.entity.Pago;
 import com.example.demo.repository.entity.Transaccion;
 import com.example.demo.repository.entity.Usuario;
 import com.example.demo.repository.entity.Venta;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.example.demo.repository.entity.ArticuloTransaccion;
 import com.example.demo.repository.entity.Compra;
 import com.example.demo.repository.entity.Direccion;
@@ -32,8 +33,11 @@ public class TransaccionDTO implements Serializable{
     // @ToString.Exclude
     // private List<Usuario> listaUsuariosVendedores;
     @ToString.Exclude
-    private List<ArticuloTransaccionDTO> articulosTransacciones;
+    @JsonIgnore
+    private Set<ArticuloTransaccionDTO> articulosTransacciones;
+    @JsonIgnore
     private Set<VentaDTO> listaVentas;
+    @JsonIgnore
 	private Set<CompraDTO> listaCompras;
 
     public static TransaccionDTO convertToDTO(Transaccion transaccion) {

@@ -10,6 +10,8 @@ import com.example.demo.repository.entity.Compra;
 import com.example.demo.repository.entity.Usuario;
 import com.example.demo.repository.entity.UsuarioDireccion;
 import com.example.demo.repository.entity.Venta;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -39,9 +41,13 @@ public class UsuarioDTO implements Serializable{
 	private String rol;
 	
 	// Relaciones
+	@JsonIgnore
   	private Set<Articulo> listaArticulos;
+	@JsonIgnore
 	private Set<UsuarioDireccion> listaUsuarioDireccion;
+	@JsonIgnore
 	private Set<Venta> listaVentas;
+	@JsonIgnore
 	private Set<Compra> listaCompras;
 
 	
