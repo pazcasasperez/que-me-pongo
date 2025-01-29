@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import com.example.demo.repository.entity.Pago;
 import com.example.demo.repository.entity.Transaccion;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -23,8 +24,9 @@ public class PagoDTO implements Serializable{
 	private String numeroTelefono;
 	
 	//Relaciones
-	
+	@JsonIgnore
 	private List<TransaccionDTO> transaccionRecibida = new ArrayList<TransaccionDTO>();
+	@JsonIgnore
 	private List<TransaccionDTO> transaccionRealizada = new ArrayList<TransaccionDTO>();
 	
 	// Conversiones

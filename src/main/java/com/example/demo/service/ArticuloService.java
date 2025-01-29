@@ -12,4 +12,6 @@ public interface ArticuloService {
 
 	ArticuloDTO findById(ArticuloDTO articuloDTO);
 
+	void delete(ArticuloDTO articuloDTO);
+
 }

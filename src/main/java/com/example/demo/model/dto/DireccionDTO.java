@@ -7,6 +7,7 @@ import java.util.Set;
 import com.example.demo.repository.entity.Direccion;
 import com.example.demo.repository.entity.Transaccion;
 import com.example.demo.repository.entity.UsuarioDireccion;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -40,11 +41,14 @@ public class DireccionDTO implements Serializable{
 	private String personaContactoPuntoRecogida;
 
 	// Relaciones
+	@JsonIgnore
 	private Set<UsuarioDireccionDTO> listaUsuarioDireccion;
 	//Direccion ---> Transaccion
+	@JsonIgnore
 	private Set<TransaccionDTO> listaTransaccionesEnvios;
 	 
 	//Direccion ---> Transaccion
+	@JsonIgnore
 	private Set<TransaccionDTO> listaTransaccionesVendedores;
 
 	// HashCode y equals
