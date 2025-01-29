@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.example.demo.repository.entity.Articulo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -32,8 +34,11 @@ public class ArticuloDTO implements Serializable {
 	private String estampado;
 	private double precio;
 	private UsuarioDTO usuario;
+	@JsonIgnore
 	private Set<ArticuloTransaccionDTO> listaArticulosTransaccion;
+	@JsonIgnore
 	private Set<VentaDTO> listaVentas;
+	@JsonIgnore
 	private Set<CompraDTO> listaCompras;
 	
 

@@ -23,14 +23,10 @@ public interface VentaMapper {
 	// Mapeo principal de Articulo a ArticuloDTO
 	
 	@Named("toDTOV")
-	@Mapping(target = "articulo", ignore = true)
-	@Mapping(target = "transaccion", ignore = true)
     VentaDTO toDTO(Venta venta);
 
     // Mapeo inverso (opcional)
 	@Named("toEntityV")
-	@Mapping(target = "articulo", ignore = true)
-	@Mapping(target = "transaccion", ignore = true)
     Venta toEntity(VentaDTO ventaDTO);
     
     @IterableMapping(qualifiedByName = "toDTOV")

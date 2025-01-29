@@ -62,4 +62,12 @@ public class ArticuloServiceImpl implements ArticuloService {
 		log.info("ArticuloDTO MYSQL" + articuloDTO.toString());
 		return articuloDTO ;
 	}
+
+	@Override
+	public void delete(ArticuloDTO articuloDTO) {
+		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Desactivamos en el servicio el articulo: " + articuloDTO.getId());
+		Articulo articulo = articuloRepository.findById(articuloDTO.getId()).get();
+		articulo.setActivo(false);
+		articuloRepository.save(articulo);
+	}
 }
