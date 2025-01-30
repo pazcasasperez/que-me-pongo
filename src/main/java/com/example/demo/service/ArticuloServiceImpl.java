@@ -26,17 +26,18 @@ public class ArticuloServiceImpl implements ArticuloService {
 	public List<ArticuloDTO> findAll() {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos la lista de articulos al servicio");
 		
-		List<Articulo> listaArticulos = articuloRepository.findAll();/*
+		List<Articulo> listaArticulos = articuloRepository.findAll();
 		List<ArticuloDTO> listaArticulosDTO = new ArrayList<ArticuloDTO>();
 		for(Articulo a : listaArticulos) {
 			ArticuloDTO art =articuloMapper.toDTO(a);
 			//ArticuloDTO art = ArticuloMapper.INSTANCE.toDTO(a);
 			listaArticulosDTO.add(art);
 			//listaArticulosDTO.add(ArticuloDTO.convertToDTO(a));
-		}*/
-		//listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toSet());
-		return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
-		//return listaArticulosDTO;
+		}
+		//return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
+		//return listaArticulos.stream().map(articuloMapper::toDTOA).collect(Collectors.toList());
+		return listaArticulosDTO;
+		//return null;
 	}
 
 	@Override
@@ -53,21 +54,24 @@ public class ArticuloServiceImpl implements ArticuloService {
 	 *  un articulo al controlador, para poder controlar el error
 	 */
 	@Override
-	public ArticuloDTO save(ArticuloDTO articuloDTO) {
+	public int save(ArticuloDTO articuloDTO) {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Guardamos en el servicio un nuevo articulo");
 		log.info("ArticuloDTO " + articuloDTO.toString());
 		Articulo articulo = ArticuloMapper.INSTANCE.toEntity(articuloDTO);
 		Articulo art = articuloRepository.save(articulo);
-		articuloDTO = ArticuloMapper.INSTANCE.toDTO(art);
-		log.info("ArticuloDTO MYSQL" + articuloDTO.toString());
-		return articuloDTO ;
+		if(art== null) {
+			return 0;
+		}else {
+			return 1;
+		}
 	}
 
 	@Override
-	public void delete(ArticuloDTO articuloDTO) {
+	public ArticuloDTO delete(ArticuloDTO articuloDTO) {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Desactivamos en el servicio el articulo: " + articuloDTO.getId());
 		Articulo articulo = articuloRepository.findById(articuloDTO.getId()).get();
 		articulo.setActivo(false);
 		articuloRepository.save(articulo);
+		return articuloDTO;
 	}
 }
