@@ -62,15 +62,19 @@ public class UsuarioRestController {
 	// @PathVariable("nombreusuario") String nombreusuario,
 	// @PathVariable("password") String password
 	@PostMapping("/login")
-	public ResponseEntity login(@RequestBody UsuarioDTO usuarioDTO) {
+	public ResponseEntity<Integer> login(@RequestBody UsuarioDTO usuarioDTO) {
 
 		log.info(UsuarioRestController.class.getSimpleName() + " - login ");
 
+		log.info(usuarioDTO.toString());
+		
 		int idUsuario = usuarioService.login(usuarioDTO);
 		if (idUsuario < 0) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			log.info("ha fallado");
+			return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<>(HttpStatus.OK);
+			log.info("ha triunfado");
+			return new ResponseEntity<>(idUsuario, HttpStatus.OK);
 		}
 	}
 	/*
