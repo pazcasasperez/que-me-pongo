@@ -1,6 +1,7 @@
 package com.example.demo.repository.dao;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +17,10 @@ import jakarta.transaction.Transactional;
 @Transactional
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
+	@Query(value = " select u.* from usuarios u where nombre_usuario=:usuario", nativeQuery = true)
+	Optional<Usuario> login(@Param("usuario") String usuario);
+
 	@Query(value = " select u.* from usuarios u where nombre_usuario=:usuario and password=:pass", nativeQuery = true)
-	Set<Usuario> login(@Param("usuario") String usuario, @Param("pass") String pass);
+	Object findByUsername(String nombreUsuario, String password);
+	
 }
