@@ -1,5 +1,6 @@
 package com.example.demo.service.mapper;
 
+import java.util.List;
 import java.util.Set;
 
 import org.mapstruct.IterableMapping;
@@ -19,22 +20,24 @@ public interface ArticuloMapper {
 	ArticuloMapper INSTANCE = Mappers.getMapper(ArticuloMapper.class);
 	//Mapeo principal de Articulo a ArticuloDTO 
 	@Named("toDTOA")
-	@Mapping(target ="listaArticulosTransaccion", source = "listaArticulosTransaccion",qualifiedByName = "toDTOT", ignore=true) 
-	@Mapping(target = "listaVentas", source ="listaVentas", qualifiedByName = "toDTOV", ignore=true) 
-	@Mapping(target ="listaCompras", source = "listaCompras", qualifiedByName = "toDTOC", ignore=true)
+	@Mapping(target ="listaArticulosTransaccion", source = "listaArticulosTransaccion", ignore=true) 
+	@Mapping(target = "listaVentas", source ="listaVentas", ignore=true) 
+	@Mapping(target ="listaCompras", source = "listaCompras", ignore=true)
+	@Mapping(target = "usuario", source = "usuario", ignore = true)
 	ArticuloDTO toDTO(Articulo articulo); 
 	
 	// Mapeo inverso (opcional)
 	@Named("toEntityA")
-	@Mapping(target = "listaArticulosTransaccion", source ="listaArticulosTransaccion", qualifiedByName = "toEntityT", ignore=true) 
-	@Mapping(target= "listaVentas", source = "listaVentas", qualifiedByName = "toEntityV", ignore=true)
-	@Mapping(target = "listaCompras", source = "listaCompras", qualifiedByName ="toEntityC", ignore=true) 
+	@Mapping(target = "listaArticulosTransaccion", source ="listaArticulosTransaccion", ignore=true) 
+	@Mapping(target= "listaVentas", source = "listaVentas", ignore=true)
+	@Mapping(target = "listaCompras", source = "listaCompras", ignore=true) 
+	@Mapping(target = "usuario", source = "usuario", ignore= true)
 	Articulo toEntity(ArticuloDTO articuloDTO);
 	
 	@IterableMapping(qualifiedByName = "toDTOA") 
-	Set<ArticuloDTO> articulosToArticulosDTO(Set<Articulo> listaArticulos);
+	List<ArticuloDTO> articulosToArticulosDTO(Set<Articulo> listaArticulos);
 	
 	@IterableMapping(qualifiedByName = "toEntityA") 
-	Set<Articulo> articulosDTOToArticulos(Set<ArticuloDTO> listaArticulosDTO);
+	Set<Articulo> articulosDTOToArticulos(List<ArticuloDTO> listaArticulosDTO);
 
 }
