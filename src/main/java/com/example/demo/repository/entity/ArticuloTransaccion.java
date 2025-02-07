@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -26,10 +27,12 @@ public class ArticuloTransaccion {
     // Relacionamos articulostransaccion con las tablas correspondientes
     @ManyToOne
     @JoinColumn(name = "id_transaccion")
+    @ToString.Exclude
     private Transaccion transaccion;
 
     @ManyToOne
     @JoinColumn(name = "id_articulo")
+    @ToString.Exclude
     private Articulo articulo;
 
     @Override

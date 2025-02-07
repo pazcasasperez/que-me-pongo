@@ -8,14 +8,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class ArticuloTransaccionDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
     private Long id;
-
+    @ToString.Exclude
     private ArticuloDTO articuloDTO;
+    @ToString.Exclude
     private TransaccionDTO transaccionDTO;
     private double precioVenta;
     private double precioFinal;

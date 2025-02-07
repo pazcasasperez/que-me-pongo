@@ -1,6 +1,8 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,30 +28,28 @@ public class DireccionDTO implements Serializable{
 	private String nombre;
 	private String numero;
 	private String puerta;
-	@Column(name = "cp")
 	private String codigoPostal;
 	private String provincia;
 	private boolean activo;
 	private String ciudad;
-	@Column(name = "nombre_pto_recogida")
 	private String nombrePuntoRecogida;
-	@Column(name = "telefono_pto_Recogida")
 	private String telefonoPuntoRecogida;
-	@Column(name = "horario_pto_recogida")
 	private String horariosPuntorecogida;
-	@Column(name = "persona_contacto_pto_recogida")
 	private String personaContactoPuntoRecogida;
 
 	// Relaciones
 	@JsonIgnore
-	private Set<UsuarioDireccionDTO> listaUsuarioDireccion;
+	@ToString.Exclude
+	private List<UsuarioDireccionDTO> listaUsuarioDireccion = new ArrayList<UsuarioDireccionDTO>();
 	//Direccion ---> Transaccion
 	@JsonIgnore
-	private Set<TransaccionDTO> listaTransaccionesEnvios;
+	@ToString.Exclude
+	private List<TransaccionDTO> listaTransaccionesEnvios = new ArrayList<TransaccionDTO>();
 	 
 	//Direccion ---> Transaccion
 	@JsonIgnore
-	private Set<TransaccionDTO> listaTransaccionesVendedores;
+	@ToString.Exclude
+	private List<TransaccionDTO> listaTransaccionesVendedores = new ArrayList<TransaccionDTO>();
 
 	// HashCode y equals
 	@Override

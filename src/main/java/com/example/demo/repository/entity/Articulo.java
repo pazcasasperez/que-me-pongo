@@ -58,17 +58,17 @@ public class Articulo {
 	// Relacion tiene - Articulo  ---> ArticuloTransaccion
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
 	@ToString.Exclude
-	private Set<ArticuloTransaccion> listaArticulosTransaccion;
+	private Set<ArticuloTransaccion> listaArticulosTransaccion = new HashSet<ArticuloTransaccion>();
 	
 	// Relacion tiene - Articulo ---> Vender
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
 	@ToString.Exclude
-	private Set<Venta> listaVentas;
+	private Set<Venta> listaVentas = new HashSet<Venta>();
 	
 	// Relacion tiene - Articulo ---> Vender
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo")
 	@ToString.Exclude
-	private Set<Compra> listaCompras;
+	private Set<Compra> listaCompras = new HashSet<Compra>();
 
 
 	// Equals y hash
