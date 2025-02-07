@@ -16,17 +16,18 @@ import com.example.demo.repository.entity.Venta;
 @Mapper(componentModel = "spring")
 public interface VentaMapper {
 	VentaMapper INSTANCE = Mappers.getMapper(VentaMapper.class);
-	/*
-	
-	ArticuloDTO toDTO (Articulo articulo);*/
-	
-	// Mapeo principal de Articulo a ArticuloDTO
 	
 	@Named("toDTOV")
+	@Mapping(target ="usuario", source = "usuario") 
+	@Mapping(target ="articulo", source = "articulo")
+	@Mapping(target ="transaccion", source = "transaccion")
     VentaDTO toDTO(Venta venta);
 
     // Mapeo inverso (opcional)
 	@Named("toEntityV")
+	@Mapping(target ="usuario", source = "usuario") 
+	@Mapping(target ="articulo", source = "articulo")
+	@Mapping(target ="transaccion", source = "transaccion")
     Venta toEntity(VentaDTO ventaDTO);
     
     @IterableMapping(qualifiedByName = "toDTOV")

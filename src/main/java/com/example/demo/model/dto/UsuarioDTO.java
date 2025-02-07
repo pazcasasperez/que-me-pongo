@@ -2,8 +2,10 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -49,13 +51,17 @@ public class UsuarioDTO implements UserDetails{
 	
 	// Relaciones
 	@JsonIgnore
-  	private Set<Articulo> listaArticulos;
+	@ToString.Exclude
+  	private List<ArticuloDTO> listaArticulos = new ArrayList<ArticuloDTO>();
 	@JsonIgnore
-	private Set<UsuarioDireccion> listaUsuarioDireccion;
+	@ToString.Exclude
+	private List<UsuarioDireccionDTO> listaUsuarioDireccion = new ArrayList<UsuarioDireccionDTO>();
 	@JsonIgnore
-	private Set<Venta> listaVentas;
+	@ToString.Exclude
+	private List<VentaDTO> listaVentas = new ArrayList<VentaDTO>();
 	@JsonIgnore
-	private Set<Compra> listaCompras;
+	@ToString.Exclude
+	private List<CompraDTO> listaCompras = new ArrayList<CompraDTO>();
 
 	
 	// HashCode y equals
