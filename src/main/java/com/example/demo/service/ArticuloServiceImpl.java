@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.ArticuloDTO;
 import com.example.demo.repository.dao.ArticuloRepository;
 import com.example.demo.repository.entity.Articulo;
+import com.example.demo.repository.entity.Usuario;
 import com.example.demo.service.mapper.ArticuloMapper;
+import com.example.demo.service.mapper.UsuarioMapper;
 
 @Service
 public class ArticuloServiceImpl implements ArticuloService {
@@ -57,8 +59,12 @@ public class ArticuloServiceImpl implements ArticuloService {
 	public int save(ArticuloDTO articuloDTO) {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Guardamos en el servicio un nuevo articulo");
 		log.info("ArticuloDTO " + articuloDTO.toString());
+		//log.info("Usuario: " + articuloDTO.getUsuario().toString());
 		Articulo articulo = ArticuloMapper.INSTANCE.toEntity(articuloDTO);
+		Usuario u = UsuarioMapper.INSTACE.toEntity(articuloDTO.getUsuario());
+		articulo.setUsuario(u);
 		Articulo art = articuloRepository.save(articulo);
+		log.info("   Articulo devuelto del repository al actualizar: " + art.toString());
 		if(art== null) {
 			return 0;
 		}else {
