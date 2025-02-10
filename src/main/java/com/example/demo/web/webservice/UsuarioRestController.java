@@ -68,7 +68,7 @@ public class UsuarioRestController {
 		log.info(UsuarioRestController.class.getSimpleName() + " - login ");
 
 		log.info(usuarioDTO.toString());
-		
+
 		int idUsuario = usuarioService.login(usuarioDTO);
 		if (idUsuario < 0) {
 			log.info("ha fallado");
@@ -78,6 +78,26 @@ public class UsuarioRestController {
 			return new ResponseEntity<>(idUsuario, HttpStatus.OK);
 		}
 	}
+
+	@GetMapping("/search/{nombreUsuario}")
+	public ResponseEntity<UsuarioDTO> findByNombreUsuario(@PathVariable("nombreUsuario") String nomUsuario) {
+		log.info(UsuarioRestController.class.getSimpleName() + " - Buscamos si existe el cliente: " + nomUsuario);
+		// Obtenemos el usuario y se lo pasamos al modelo
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombreUsuario(nomUsuario);
+		usuarioDTO = usuarioService.findByNombreUsuario(usuarioDTO);
+
+		log.info(usuarioDTO.toString());
+
+		if (usuarioDTO == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
+		}
+	}
+
+
+
 	/*
 	 * IMPLEMENTAR EL SAVE EN EL SERVICE ADD
 	 * 

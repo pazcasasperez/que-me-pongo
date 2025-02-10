@@ -80,5 +80,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	}
 
+	@Override
+	public UsuarioDTO findByNombreUsuario(UsuarioDTO usuarioDTO) {
+		log.info(UsuarioServiceImpl.class.getName() + " - Buscamos el cliente por el nombreUsuario "
+				+ usuarioDTO.getNombreUsuario());
+		Optional<Usuario> usuario = usuarioRepository.login(usuarioDTO.getNombreUsuario());
+		usuarioDTO = UsuarioMapper.INSTACE.toDTO(usuario.get());
+		log.info(UsuarioServiceImpl.class.getName() + " - Vueelta del repositorio: el cliente por el nombreUsuario "
+				+ usuarioDTO.toString());
+		return usuarioDTO;
+	}
 	
 }
