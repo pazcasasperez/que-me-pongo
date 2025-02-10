@@ -59,9 +59,9 @@ public class UsuarioRestController {
 		}
 	}
 
-	// @PathVariable("nombreusuario") String nombreusuario,
+	//  @PathVariable("nombreusuario") String nombreusuario,
 	// @PathVariable("password") String password
-	/*
+	
 	@PostMapping("/login")
 	public ResponseEntity<Integer> login(@RequestBody UsuarioDTO usuarioDTO) {
 
@@ -77,7 +77,7 @@ public class UsuarioRestController {
 			log.info("ha triunfado");
 			return new ResponseEntity<>(idUsuario, HttpStatus.OK);
 		}
-	}*/
+	}
 	/*
 	 * IMPLEMENTAR EL SAVE EN EL SERVICE ADD
 	 * 
