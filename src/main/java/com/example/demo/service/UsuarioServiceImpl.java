@@ -59,7 +59,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 * Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
 	 * usuarioRepository.save(usuario); }
 	 */
-/*
+
 	@Override
 	public int login(UsuarioDTO usuarioDTO) {
 
@@ -78,5 +78,5 @@ public class UsuarioServiceImpl implements UsuarioService {
 			return Math.toIntExact(usuario.stream().findFirst().get().getId());
 		}
 
-	}*/
+	}
 }

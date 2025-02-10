@@ -2,15 +2,8 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.repository.entity.Articulo;
 import com.example.demo.repository.entity.Compra;
@@ -28,7 +21,7 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-public class UsuarioDTO implements UserDetails{
+public class UsuarioDTO implements Serializable{
 	
 	// Atributos
 	private static final long serialVersionUID = 1L;
@@ -116,16 +109,6 @@ public class UsuarioDTO implements UserDetails{
 		
 		//Retornamos la entidad
 		return usuario;
-	}
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.stream(rol.split(","))
-                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.trim().toUpperCase()))
-                .collect(Collectors.toList());
-	}
-	@Override
-	public String getUsername() {
-		return this.nombreUsuario;
 	}
 	
 }

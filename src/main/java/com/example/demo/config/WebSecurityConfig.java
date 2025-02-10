@@ -1,53 +1,49 @@
 package com.example.demo.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.example.demo.model.dto.UsuarioDTO;
-import com.example.demo.repository.dao.UsuarioRepository;
-
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig {
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                return http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/fragments/**").permitAll()
+                        .requestMatchers("/")
+                        .hasRole("ADMIN").anyRequest().authenticated())
+                        .formLogin(form -> form.loginPage("/login")
+                                .defaultSuccessUrl("/usuarios", true)
+                                .failureUrl("/login?error")
+                                .permitAll()).logout(logout -> logout.logoutSuccessUrl("/").permitAll()).build();}
 
-	@Bean
-	 public UserDetailsService userDetailsService() {
-	 return username -> 
-	 usuarioRepository.login(username).map(UsuarioDTO::convertToDTO)
-	 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado: " + username));
-	 }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        }
 
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+        @Bean
+        public UserDetailsService userDetailsService() {
+                UserDetails user1 = User.builder()
+                                .username("jpperez")
+                                .password(passwordEncoder().encode("secure123"))
+                                .roles("USER")
+                                .build();
 
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-		return config.getAuthenticationManager();
-	}
-
-	@Bean
-	public AuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-		provider.setUserDetailsService(this.userDetailsService());
-		provider.setPasswordEncoder(this.passwordEncoder());
-		return provider;
-	}
+                UserDetails user2 = User.builder()
+                                .username("juan123")
+                                .password(passwordEncoder().encode("secure123"))
+                                .roles("ADMIN", "USER")
+                                .build();
+                return new InMemoryUserDetailsManager(user1, user2);
+        }
 }
