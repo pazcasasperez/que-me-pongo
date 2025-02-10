@@ -28,11 +28,11 @@ public class SecurityConfiguration {
 	@Autowired
 	private JwtUtil jwtUtil;
 
-	/*@Bean
+	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/auth/**").permitAll()
-						.requestMatchers("/api/articulos/**").permitAll()
+						.requestMatchers("/api/intervalos/**").permitAll().requestMatchers("/api/dias/**").permitAll()
 						.requestMatchers("/api/cuadrantes/currentWeek").permitAll()
 						.requestMatchers("/api/cuadrantes/today").permitAll().anyRequest().authenticated())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -41,18 +41,6 @@ public class SecurityConfiguration {
 		http.headers(headers -> headers.frameOptions(f -> f.disable()));
 		http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 		return http.build();
-	}*/
-	
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		
-		http
-			.csrf(csrf -> csrf.disable())
-			.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/**").permitAll()
-				.anyRequest().authenticated()
-				);
-				return http.build();
 	}
 
 	@Bean
