@@ -30,7 +30,7 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-public class UsuarioDTO implements UserDetails{
+public class UsuarioDTO implements Serializable{
 	
 	// Atributos
 	private static final long serialVersionUID = 1L;
@@ -123,15 +123,7 @@ public class UsuarioDTO implements UserDetails{
 		//Retornamos la entidad
 		return usuario;
 	}
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.stream(rol.split(","))
-                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.trim().toUpperCase()))
-                .collect(Collectors.toList());
-	}
-	@Override
-	public String getUsername() {
-		return this.nombreUsuario;
-	}
+	
+	
 	
 }
