@@ -45,7 +45,7 @@ public class ArticuloServiceImpl implements ArticuloService {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos el articulo con id " + articuloDTO.getId() + " al servicio");
 
 		Articulo a = articuloRepository.findById(articuloDTO.getId()).get();
-		articuloDTO = articuloMapper.toDTO(a);
+		articuloDTO = ArticuloDTO.convertToDTO(a);
 		
 		return articuloDTO;
 	}
