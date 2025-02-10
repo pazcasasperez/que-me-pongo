@@ -46,18 +46,18 @@ public class Direccion {
 	// Mapeamos con la entidad UsuarioDireccion
 	 @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "direccion")
 	 @ToString.Exclude
-	 private Set<UsuarioDireccion> listaUsuarioDireccion = new HashSet<UsuarioDireccion>();
+	 private Set<UsuarioDireccion> listaUsuarioDireccion;
 	 
 	 
 	 //Direccion ---> Transaccion
 	 @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "envio")
 	 @ToString.Exclude
-	 private Set<Transaccion> listaTransaccionesEnvios = new HashSet<Transaccion>();
+	 private Set<Transaccion> listaTransaccionesEnvios;
 	 
 	//Direccion ---> Transaccion
 	 @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "direccionVendedor")
 	 @ToString.Exclude
-	 private Set<Transaccion> listaTransaccionesVendedores = new HashSet<Transaccion>();
+	 private Set<Transaccion> listaTransaccionesVendedores;
 
 
 	// hash y equals

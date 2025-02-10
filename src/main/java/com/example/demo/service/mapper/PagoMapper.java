@@ -1,6 +1,5 @@
 package com.example.demo.service.mapper;
 
-import java.util.List;
 import java.util.Set;
 
 import org.mapstruct.IterableMapping;
@@ -30,9 +29,9 @@ public interface PagoMapper {
 	Pago toEntity(PagoDTO articuloDTO);
 	
 	@IterableMapping(qualifiedByName = "toDTOP") 
-	List<PagoDTO> pagosToPagosDTO(Set<Pago> listaPagos);
+	Set<PagoDTO> pagosToPagosDTO(Set<Pago> listaPagos);
 	
 	@IterableMapping(qualifiedByName = "toEntityP") 
-	Set<Pago> pagosDTOToPagos(List<PagoDTO> listaPagosDTO);
+	Set<Pago> pagosDTOToPagos(Set<PagoDTO> listaPagosDTO);
 
 }
