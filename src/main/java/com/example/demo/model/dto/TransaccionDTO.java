@@ -26,25 +26,19 @@ public class TransaccionDTO implements Serializable{
     private String estado;
     private double gastosEnvio;
     private LocalDate fecha;
-    @ToString.Exclude
     private Pago pagoCompra;
-    @ToString.Exclude
     private Pago pagoVenta;
-    @ToString.Exclude
     private Direccion envio;
-    @ToString.Exclude
     private Direccion direccionVendedor;
     // @ToString.Exclude
     // private List<Usuario> listaUsuariosVendedores;
     @ToString.Exclude
     @JsonIgnore
-    private List<ArticuloTransaccionDTO> articulosTransacciones = new ArrayList<ArticuloTransaccionDTO>();
+    private Set<ArticuloTransaccionDTO> articulosTransacciones;
     @JsonIgnore
-    @ToString.Exclude
-    private List<VentaDTO> listaVentas = new ArrayList<VentaDTO>();
+    private Set<VentaDTO> listaVentas;
     @JsonIgnore
-    @ToString.Exclude
-	private List<CompraDTO> listaCompras = new ArrayList<CompraDTO>() ;
+	private Set<CompraDTO> listaCompras;
 
     public static TransaccionDTO convertToDTO(Transaccion transaccion) {
         TransaccionDTO transaccionDTO = new TransaccionDTO();

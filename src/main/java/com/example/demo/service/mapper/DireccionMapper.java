@@ -1,6 +1,5 @@
 package com.example.demo.service.mapper;
 
-import java.util.List;
 import java.util.Set;
 
 import org.mapstruct.IterableMapping;
@@ -31,10 +30,10 @@ public interface DireccionMapper {
 	Direccion toEntity(DireccionDTO direccionDTO);
 	
 	@IterableMapping(qualifiedByName = "toDTOD") 
-	List<DireccionDTO> direccionesToDireccionesDTO(Set<Direccion> listaDirecciones);
+	Set<DireccionDTO> direccionesToDireccionesDTO(Set<Direccion> listaDirecciones);
 	
 	@IterableMapping(qualifiedByName = "toEntityD") 
-	Set<Direccion> direccionesDTOToDirecciones(List<DireccionDTO> listaDireccionesDTO);
+	Set<Direccion> direccionesDTOToDirecciones(Set<DireccionDTO> listaDireccionesDTO);
 
 
 }

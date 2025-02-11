@@ -35,36 +35,32 @@ public class Transaccion {
 	private LocalDate fecha;
 	@ManyToOne
 	@JoinColumn(name = "id_pago_compra")
-	@ToString.Exclude
 	private Pago pagoCompra;
 	@ManyToOne
 	@JoinColumn(name = "id_pago_venta")
-	@ToString.Exclude
 	private Pago pagoVenta;
 	@ManyToOne
 	@JoinColumn(name = "id_dir_envio")
-	@ToString.Exclude
 	private Direccion envio;
-	@ManyToOne
+	 @ManyToOne
 	@JoinColumn(name = "id_dir_vendedor")
-	@ToString.Exclude
 	private Direccion direccionVendedor;
 
 	// private List<Usuario> listaUsuariosVendedores;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transaccion")
 	@ToString.Exclude
-	private Set<ArticuloTransaccion> articulosTransacciones = new HashSet<ArticuloTransaccion>();
-
+	private Set<ArticuloTransaccion> articulosTransacciones;
+	
 	// Relacion tiene - Articulo ---> Vender
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transaccion")
 	@ToString.Exclude
-	private Set<Venta> listaVentas = new HashSet<Venta>();
-
+	private Set<Venta> listaVentas;
+	
 	// Relacion tiene - Articulo ---> Vender
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transaccion")
 	@ToString.Exclude
-	private Set<Compra> listaCompras = new HashSet<Compra>();
+	private Set<Compra> listaCompras;
 
 	public Transaccion() {
 		super();

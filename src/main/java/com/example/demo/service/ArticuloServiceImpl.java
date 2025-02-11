@@ -28,18 +28,17 @@ public class ArticuloServiceImpl implements ArticuloService {
 	public List<ArticuloDTO> findAll() {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos la lista de articulos al servicio");
 		
-		List<Articulo> listaArticulos = articuloRepository.findAll();
+		List<Articulo> listaArticulos = articuloRepository.findAll();/*
 		List<ArticuloDTO> listaArticulosDTO = new ArrayList<ArticuloDTO>();
 		for(Articulo a : listaArticulos) {
 			ArticuloDTO art =articuloMapper.toDTO(a);
 			//ArticuloDTO art = ArticuloMapper.INSTANCE.toDTO(a);
 			listaArticulosDTO.add(art);
 			//listaArticulosDTO.add(ArticuloDTO.convertToDTO(a));
-		}
-		//return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
-		//return listaArticulos.stream().map(articuloMapper::toDTOA).collect(Collectors.toList());
-		return listaArticulosDTO;
-		//return null;
+		}*/
+		//listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toSet());
+		return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
+		//return listaArticulosDTO;
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class ArticuloServiceImpl implements ArticuloService {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos el articulo con id " + articuloDTO.getId() + " al servicio");
 
 		Articulo a = articuloRepository.findById(articuloDTO.getId()).get();
-		articuloDTO = articuloMapper.toDTO(a);
+		articuloDTO = ArticuloDTO.convertToDTO(a);
 		
 		return articuloDTO;
 	}
@@ -56,7 +55,7 @@ public class ArticuloServiceImpl implements ArticuloService {
 	 *  un articulo al controlador, para poder controlar el error
 	 */
 	@Override
-	public int save(ArticuloDTO articuloDTO) {
+	public ArticuloDTO save(ArticuloDTO articuloDTO) {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Guardamos en el servicio un nuevo articulo");
 		log.info("ArticuloDTO " + articuloDTO.toString());
 		Articulo articulo = ArticuloMapper.INSTANCE.toEntity(articuloDTO);
@@ -65,19 +64,16 @@ public class ArticuloServiceImpl implements ArticuloService {
         articulo.setUsuario(u);
 
 		Articulo art = articuloRepository.save(articulo);
-		if(art== null) {
-			return 0;
-		}else {
-			return 1;
-		}
+		articuloDTO = ArticuloMapper.INSTANCE.toDTO(art);
+		log.info("ArticuloDTO MYSQL" + articuloDTO.toString());
+		return articuloDTO ;
 	}
 
 	@Override
-	public ArticuloDTO delete(ArticuloDTO articuloDTO) {
+	public void delete(ArticuloDTO articuloDTO) {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Desactivamos en el servicio el articulo: " + articuloDTO.getId());
 		Articulo articulo = articuloRepository.findById(articuloDTO.getId()).get();
 		articulo.setActivo(false);
 		articuloRepository.save(articulo);
-		return articuloDTO;
 	}
 }

@@ -17,10 +17,7 @@ import lombok.ToString;
 public class UsuarioDireccionDTO implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	private boolean predeterminada;
-	@ToString.Exclude
 	private UsuarioDTO usuario;
-	@ToString.Exclude
 	private DireccionDTO direccion;
 	
 	//Conversiones

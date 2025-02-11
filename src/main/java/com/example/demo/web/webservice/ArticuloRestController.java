@@ -22,9 +22,9 @@ public class ArticuloRestController {
     private ArticuloService articuloService;
 
     // Obtener todos los artículos (GET)
-    @GetMapping()
+    @GetMapping("")
     public ResponseEntity<List<ArticuloDTO>> findAll() {
-        log.info(ArticuloRestController.class.getSimpleName() + " -- Listando todos los artículos");
+        log.info(ArticuloRestController.class.getSimpleName() + " -- Listando los artículos");
         List<ArticuloDTO> listaArticulosDTO = articuloService.findAll();
         return new ResponseEntity<>(listaArticulosDTO, HttpStatus.OK);
     }
@@ -44,30 +44,33 @@ public class ArticuloRestController {
         // y le mandamos el articulo
         return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
     }
-    // Añadir cliente
-    @PostMapping()
-    public ResponseEntity add(@RequestBody ArticuloDTO articuloDTO) {
+    // Faltaria pasarle el cliente, y meterlo en el articulo
+    @PostMapping("")
+    public ResponseEntity<ArticuloDTO> add(@RequestBody ArticuloDTO articuloDTO) {
         log.info(ArticuloRestController.class.getSimpleName() + " -- Añadir un articulo ");
+        /**
+         * ClienteDTO clienteDTO = new ClienteDTO();
+        // clienteDTO.setId(idCliente);
+        // articuloDTO.setCliente(clienteDTO);
+         */
+
+        
         //Almacenamos la devolucion del guardado que nos envia el servicio para 
         // poder comprobar que ha funcionado 
-        int r = articuloService.save(articuloDTO);
+        articuloDTO = articuloService.save(articuloDTO);
         //Miro si lo q viene del service esta vacio o me devuelve el objeto insertado
         //Si vuelve vacion mandamos un mensaje al front de que ha ido mal
-        if(r==0) {
+        if(articuloDTO==null) {
         	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }else {
-        	// Si lo hemos insertadp. Le devolvemos que se ha insertado 
-            // y le mandamos el articulo
-            return new ResponseEntity<>(HttpStatus.OK);
         }
-        
+        // Si lo hemos insertadp. Le devolvemos que se ha insertado 
+        // y le mandamos el articulo
+        return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
     }
-    @PutMapping()
-    public ResponseEntity update(@RequestBody ArticuloDTO articuloDTO) {
+    @PutMapping("")
+    public ResponseEntity<ArticuloDTO> update(@RequestBody ArticuloDTO articuloDTO) {
         log.info(ArticuloRestController.class.getSimpleName() + " -- Actualizamos el articulo " + articuloDTO.getId());
         // Primero veremos si el articulo existe, para ello, lo buscaremos por medio del servicio
-        /*   EN LOS APUNTOS ESTA ASI, EN CLASE HA DICHO Q NO HACE FALTA
-         *   LO DEJO POR SI ACASO
         ArticuloDTO articuloExDTO = new ArticuloDTO();
         articuloExDTO.setId(articuloDTO.getId());
         articuloExDTO = articuloService.findById(articuloExDTO);
@@ -75,16 +78,10 @@ public class ArticuloRestController {
         // si no lo ha encontrado, mandamos un mensaje de no encontrado al front
         if(articuloExDTO==null) {
         	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }*/
-        // Si lo hemos actualizamos. Le devolvemos que se ha realizado la operacion
-        int r = articuloService.save(articuloDTO);
-        if(r==0) {
-        	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }else {
-        	// Si lo hemos insertadp. Le devolvemos que se ha insertado 
-            // y le mandamos el articulo
-            return new ResponseEntity<>(HttpStatus.OK);
         }
+        // Si lo hemos actualizamos. Le devolvemos que se ha realizado la operacion
+        articuloDTO = articuloService.save(articuloDTO);
+        return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
     }   
     
     
@@ -94,11 +91,8 @@ public class ArticuloRestController {
     	log.info(ArticuloRestController.class.getSimpleName() + " -- Borramos el articulo " + idArticulo);
         ArticuloDTO articuloDTO = new ArticuloDTO();
         articuloDTO.setId(idArticulo);
-        articuloDTO= articuloService.delete(articuloDTO);
+        articuloService.delete(articuloDTO);
     	
-        if(articuloDTO!=null) {
-        	return new ResponseEntity<>( HttpStatus.NOT_FOUND);
-        }
-    	return new ResponseEntity<>(HttpStatus.OK);
+    	return new ResponseEntity<>("Cliente borrado satisfactoriamente", HttpStatus.OK);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.demo.repository.entity;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -44,23 +43,23 @@ public class Usuario {
 	// relacion usuario --> articulo
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
 	@ToString.Exclude
-  	private Set<Articulo> listaArticulos = new HashSet<Articulo>();
+  	private Set<Articulo> listaArticulos;
 	
 	
 	// Mapeamos con la entidad UsuarioDireccion
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
 	@ToString.Exclude
-	private Set<UsuarioDireccion> listaUsuarioDireccion = new HashSet<UsuarioDireccion>();
+	private Set<UsuarioDireccion> listaUsuarioDireccion;
 	
 	// Relacion tiene - Usuario ---> Vender
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
 	@ToString.Exclude
-	private Set<Venta> listaVentas = new HashSet<Venta>();
+	private Set<Venta> listaVentas;
 	
 	// Relacion tiene - Usuario ---> Vender
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
 	@ToString.Exclude
-	private Set<Compra> listaCompras = new HashSet<Compra>();
+	private Set<Compra> listaCompras;
 	
 	// Hash y equals
 	@Override
