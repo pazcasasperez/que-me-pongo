@@ -110,5 +110,9 @@ public class UsuarioDTO implements Serializable{
 		//Retornamos la entidad
 		return usuario;
 	}
+    public UsuarioDTO save(UsuarioDTO usuarioDTO) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    }
 	
 }
