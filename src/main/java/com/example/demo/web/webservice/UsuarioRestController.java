@@ -34,6 +34,17 @@ public class UsuarioRestController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	@GetMapping("")
+	public ResponseEntity<List<UsuarioDTO>> findAll(){
+		log.info(UsuarioRestController.class.getSimpleName() + " -- listamos todos los usuarios");
+		
+		List<UsuarioDTO> listaUsuariosDTO = usuarioService.findAll();
+		
+		return new ResponseEntity<>(listaUsuariosDTO, HttpStatus.OK); 
+	}
+
+	/*
+	//Obtenemos los usuarios por get
 	@GetMapping
 	public List<UsuarioDTO> findAll() {
 		log.info(UsuarioRestController.class.getSimpleName() + " - listamos todos los usuarios");
@@ -43,26 +54,44 @@ public class UsuarioRestController {
 
 		return listaUsuarioDTO;
 	}
-
+	*/
+	
 	@GetMapping("/{idUsuario}")
 	public ResponseEntity<UsuarioDTO> findById(@PathVariable("idUsurario") Long idUsuario) {
 
+		log.info(UsuarioRestController.class.getSimpleName() + " -- listamos los usuarios con el id " +idUsuario);
+				
 		// Obtenemos el usuario y se lo pasamos al modelo
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
 		usuarioDTO.setId(idUsuario);
 		usuarioDTO = usuarioService.findById(usuarioDTO);
 
+		// Nos aseguramos de que no sea null el usuario
 		if (usuarioDTO == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 		}
+		
+		/*
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setId(idUsuario);
+		usuarioDTO = usuarioService.findById(usuarioDTO);
+		
+		//Aqui hacemos que si l usuario es nulo, lo mandamos por la consola
+		if (usuarioDTO == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+		*/
 	}
 
 
 	//  @PathVariable("nombreusuario") String nombreusuario,
 	// @PathVariable("password") String password
 	
+	// Hacemos el login
 	@PostMapping("/login")
 	public ResponseEntity<Integer> login(@RequestBody UsuarioDTO usuarioDTO) {
 
@@ -79,6 +108,8 @@ public class UsuarioRestController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
+	
+	
 
 	@GetMapping("/search/{nombreUsuario}")
 	public ResponseEntity<UsuarioDTO> findByNombreUsuario(@PathVariable("nombreUsuario") String nomUsuario) {
@@ -152,13 +183,10 @@ public class UsuarioRestController {
 		}
 	}*/
 	
-	/* HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE 
-
-	 * 
-	 * 		FOTO DEL DIA 30/01/2025
-	 * 
-	 * DELETE
-	@DeleteMapping ()
+	// HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE 
+	// FOTO DEL DIA 30/01/2025
+	// Implemetamos el delete
+	@DeleteMapping ("/(idUsuario}")
 	public ResponseEntity<String> delete (@PathVariable("idUsuario") Long idUsuario){
 		
 		log.info(UsuarioRestController.class.getSimpleName() + " - borramos los datos del usuario");
@@ -167,6 +195,6 @@ public class UsuarioRestController {
 		usuarioDTO.setId(idUsuario);
 		usuarioService.delete(usuarioDTO);
 		
-		return new ResponseEntity<>("Cliente " + usuarioDTO + (" borrado satisfactoriamente"), HttpStatus.OK);
-	}*/
+		return new ResponseEntity<>("Usuario " + usuarioDTO + (" borrado satisfactoriamente"), HttpStatus.OK);
+	}
 }
