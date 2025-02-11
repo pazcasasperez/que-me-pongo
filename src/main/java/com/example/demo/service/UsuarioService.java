@@ -9,7 +9,9 @@ public interface UsuarioService {
 
 	UsuarioDTO findById(UsuarioDTO usuarioDTO);
 
-	//int login(UsuarioDTO usuarioDTO);
+	int login(UsuarioDTO usuarioDTO);
+
+    UsuarioDTO findByNombreUsuario(UsuarioDTO usuarioDTO);
 
 	//void save(UsuarioDTO usuarioDTO);
 }

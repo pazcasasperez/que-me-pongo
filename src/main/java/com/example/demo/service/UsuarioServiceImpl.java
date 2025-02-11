@@ -59,13 +59,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 * Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
 	 * usuarioRepository.save(usuario); }
 	 */
-/*
+
 	@Override
 	public int login(UsuarioDTO usuarioDTO) {
 
 		log.info(UsuarioServiceImpl.class.getName() + " - Login");
 
-		Set<Usuario> usuario = usuarioRepository.login(usuarioDTO.getNombreUsuario(), usuarioDTO.getPassword()); // Nos
+		Optional<Usuario> usuario = usuarioRepository.login(usuarioDTO.getNombreUsuario()); // Nos
 																													// devuelve
 																													// una
 																													// lista
@@ -78,5 +78,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 			return Math.toIntExact(usuario.stream().findFirst().get().getId());
 		}
 
-	}*/
+	}
+
+	@Override
+	public UsuarioDTO findByNombreUsuario(UsuarioDTO usuarioDTO) {
+		log.info(UsuarioServiceImpl.class.getName() + " - Buscamos el cliente por el nombreUsuario "
+				+ usuarioDTO.getNombreUsuario());
+		Optional<Usuario> usuario = usuarioRepository.login(usuarioDTO.getNombreUsuario());
+		usuarioDTO = UsuarioMapper.INSTACE.toDTO(usuario.get());
+		log.info(UsuarioServiceImpl.class.getName() + " - Vueelta del repositorio: el cliente por el nombreUsuario "
+				+ usuarioDTO.toString());
+		return usuarioDTO;
+	}
+	
 }
