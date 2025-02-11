@@ -51,6 +51,47 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return null;
 	}
 	/*
+
+	 * @Override public void save(UsuarioDTO usuarioDTO) {
+	 * 
+	 * log.info(UsuarioServiceImpl.class.getName()+ " - Guardamos el usuario");
+	 * 
+	 * Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
+	 * usuarioRepository.save(usuario); }
+	 */
+
+	@Override
+	public int login(UsuarioDTO usuarioDTO) {
+
+		log.info(UsuarioServiceImpl.class.getName() + " - Login");
+
+		Optional<Usuario> usuario = usuarioRepository.login(usuarioDTO.getNombreUsuario()); // Nos
+																													// devuelve
+																													// una
+																													// lista
+																													// de
+																													// users
+
+		if (usuario.isEmpty()) {
+			return -1; // Devolvemos -1 porque no hay ningun id negativo
+		} else {
+			return Math.toIntExact(usuario.stream().findFirst().get().getId());
+		}
+
+	}
+
+	@Override
+	public UsuarioDTO findByNombreUsuario(UsuarioDTO usuarioDTO) {
+		log.info(UsuarioServiceImpl.class.getName() + " - Buscamos el cliente por el nombreUsuario "
+				+ usuarioDTO.getNombreUsuario());
+		Optional<Usuario> usuario = usuarioRepository.login(usuarioDTO.getNombreUsuario());
+		usuarioDTO = UsuarioMapper.INSTACE.toDTO(usuario.get());
+		log.info(UsuarioServiceImpl.class.getName() + " - Vueelta del repositorio: el cliente por el nombreUsuario "
+				+ usuarioDTO.toString());
+		return usuarioDTO;
+	}
+	
+/*
 	@Override
 	public void save(UsuarioDTO usuarioDTO) {
 		
@@ -59,4 +100,5 @@ public class UsuarioServiceImpl implements UsuarioService{
 		Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
 		usuarioRepository.save(usuario);
 	}*/
+
 }
