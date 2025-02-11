@@ -75,7 +75,8 @@ public class UsuarioRestController {
 			log.info("ha fallado");
 			return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			log.info("ha triunfado");
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
 
