@@ -186,7 +186,7 @@ public class UsuarioRestController {
 	// HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE 
 	// FOTO DEL DIA 30/01/2025
 	// Implemetamos el delete
-	@DeleteMapping ("/(idUsuario}")
+	@DeleteMapping ("/{idUsuario}")
 	public ResponseEntity<String> delete (@PathVariable("idUsuario") Long idUsuario){
 		
 		log.info(UsuarioRestController.class.getSimpleName() + " - borramos los datos del usuario");
