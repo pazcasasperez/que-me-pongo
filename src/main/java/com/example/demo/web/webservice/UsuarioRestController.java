@@ -45,7 +45,7 @@ public class UsuarioRestController {
 	}
 
 	@GetMapping("/{idUsuario}")
-	public ResponseEntity<UsuarioDTO> findById(@PathVariable("idUsurario") Long idUsuario) {
+	public ResponseEntity<UsuarioDTO> findById(@PathVariable("idUsuario") Long idUsuario) {
 
 		// Obtenemos el usuario y se lo pasamos al modelo
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
