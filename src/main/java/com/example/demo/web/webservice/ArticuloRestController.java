@@ -5,12 +5,17 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.dto.ArticuloDTO;
 import com.example.demo.service.ArticuloService;
+import com.example.demo.web.controller.ArticuloController;
 
 @RestController
 @RequestMapping("/api/articulos") // Prefijo común para las rutas de este controlador
@@ -95,4 +100,32 @@ public class ArticuloRestController {
     	
     	return new ResponseEntity<>("Cliente borrado satisfactoriamente", HttpStatus.OK);
     }
+
+    @GetMapping("/{id}/imagen")
+    public ResponseEntity<Resource> getImage(@PathVariable Long id) {
+        try {
+            log.info(ArticuloController.class.getSimpleName() + " -- Obteniendo imagen del articulo con id " + id);
+            
+            byte[] image = articuloService.getImage(id);
+            if (image == null || image.length == 0) {
+                return ResponseEntity.notFound().build(); // Si no se encuentra la imagen
+            }
+    
+            ByteArrayResource resource = new ByteArrayResource(image);
+    
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_PNG);  // Ajusta si es necesario
+            headers.setContentLength(image.length);
+    
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .body(resource);
+    
+        } catch (Exception e) {
+            log.error("Error al obtener la imagen del artículo", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    
 }
