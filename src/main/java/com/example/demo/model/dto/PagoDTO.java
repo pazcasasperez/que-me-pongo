@@ -10,7 +10,6 @@ import com.example.demo.repository.entity.Transaccion;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 public class PagoDTO implements Serializable{
@@ -26,10 +25,8 @@ public class PagoDTO implements Serializable{
 	
 	//Relaciones
 	@JsonIgnore
-	@ToString.Exclude
 	private List<TransaccionDTO> transaccionRecibida = new ArrayList<TransaccionDTO>();
 	@JsonIgnore
-	@ToString.Exclude
 	private List<TransaccionDTO> transaccionRealizada = new ArrayList<TransaccionDTO>();
 	
 	// Conversiones

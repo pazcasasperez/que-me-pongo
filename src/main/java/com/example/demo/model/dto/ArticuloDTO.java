@@ -1,8 +1,6 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 public class ArticuloDTO implements Serializable {
@@ -36,17 +33,13 @@ public class ArticuloDTO implements Serializable {
 	private String tipoAlmacenamiento;
 	private String estampado;
 	private double precio;
-	@ToString.Exclude
 	private UsuarioDTO usuario;
 	@JsonIgnore
-	@ToString.Exclude
-	private List<ArticuloTransaccionDTO> listaArticulosTransaccion = new ArrayList<ArticuloTransaccionDTO>();
+	private Set<ArticuloTransaccionDTO> listaArticulosTransaccion;
 	@JsonIgnore
-	@ToString.Exclude
-	private List<VentaDTO> listaVentas = new ArrayList<VentaDTO>();
+	private Set<VentaDTO> listaVentas;
 	@JsonIgnore
-	@ToString.Exclude
-	private List<CompraDTO> listaCompras = new ArrayList<CompraDTO>();
+	private Set<CompraDTO> listaCompras;
 	
 
 	//Conversiones

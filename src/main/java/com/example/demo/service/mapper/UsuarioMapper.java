@@ -1,8 +1,5 @@
 package com.example.demo.service.mapper;
 
-import java.util.Set;
-
-import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -22,7 +19,7 @@ public interface UsuarioMapper {
 	@Mapping(target = "listaUsuarioDireccion", source ="listaUsuarioDireccion", qualifiedByName = "toDTOUD", ignore=true) 
 	@Mapping(target ="listaVentas", source = "listaVentas", qualifiedByName = "toDTOV", ignore=true)
 	@Mapping(target ="listaCompras", source = "listaCompras", qualifiedByName = "toDTOC", ignore=true)
-    public UsuarioDTO toDTO(Usuario usuario);
+    UsuarioDTO toDTO(Usuario usuario);
 
 	@Named("toEntityU")
 	@Mapping(target ="listaArticulos", source = "listaArticulos",qualifiedByName = "toDTOA", ignore=true) 
@@ -30,11 +27,5 @@ public interface UsuarioMapper {
 	@Mapping(target ="listaVentas", source = "listaVentas", qualifiedByName = "toDTOV", ignore=true)
 	@Mapping(target ="listaCompras", source = "listaCompras", qualifiedByName = "toDTOC", ignore=true)
     Usuario toEntity(UsuarioDTO usuarioDTO);
-	
-	@IterableMapping(qualifiedByName = "toDTOU") 
-	Set<UsuarioDTO> usuariosToUsuariosDTO(Set<Usuario> listaUsuarios);
-	
-	@IterableMapping(qualifiedByName = "toEntityU") 
-	Set<Usuario> usuariosDTOToUsuarios(Set<UsuarioDTO> listaUsuariosDTO);
 
 }

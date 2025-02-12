@@ -8,10 +8,10 @@ public interface ArticuloService {
 
 	List<ArticuloDTO> findAll();
 
-	int save(ArticuloDTO articuloDTO);
+	ArticuloDTO save(ArticuloDTO articuloDTO);
 
 	ArticuloDTO findById(ArticuloDTO articuloDTO);
 
-	ArticuloDTO delete(ArticuloDTO articuloDTO);
+	void delete(ArticuloDTO articuloDTO);
 
 }

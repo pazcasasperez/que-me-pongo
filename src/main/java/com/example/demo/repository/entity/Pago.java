@@ -1,6 +1,5 @@
 package com.example.demo.repository.entity;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,12 +40,12 @@ public class Pago {
 	// Relacion tiene - Pago ---> Transaccion
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pagoCompra")
 	@ToString.Exclude
-	private Set<Transaccion> listaPagosCompras = new HashSet<Transaccion>();
+	private Set<Transaccion> listaPagosCompras;
 	
 	// Relacion tiene - Articulo ---> Transaccion
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pagoVenta")
 	@ToString.Exclude
-	private Set<Transaccion> listaPagoVentas = new HashSet<Transaccion>();
+	private Set<Transaccion> listaPagoVentas;
 
 	
 	//Hash y equals

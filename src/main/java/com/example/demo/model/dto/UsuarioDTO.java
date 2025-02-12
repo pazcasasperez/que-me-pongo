@@ -2,17 +2,8 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.repository.entity.Articulo;
 import com.example.demo.repository.entity.Compra;
@@ -30,7 +21,7 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-public class UsuarioDTO implements UserDetails{
+public class UsuarioDTO implements Serializable{
 	
 	// Atributos
 	private static final long serialVersionUID = 1L;
@@ -51,17 +42,13 @@ public class UsuarioDTO implements UserDetails{
 	
 	// Relaciones
 	@JsonIgnore
-	@ToString.Exclude
-  	private List<ArticuloDTO> listaArticulos = new ArrayList<ArticuloDTO>();
+  	private Set<Articulo> listaArticulos;
 	@JsonIgnore
-	@ToString.Exclude
-	private List<UsuarioDireccionDTO> listaUsuarioDireccion = new ArrayList<UsuarioDireccionDTO>();
+	private Set<UsuarioDireccion> listaUsuarioDireccion;
 	@JsonIgnore
-	@ToString.Exclude
-	private List<VentaDTO> listaVentas = new ArrayList<VentaDTO>();
+	private Set<Venta> listaVentas;
 	@JsonIgnore
-	@ToString.Exclude
-	private List<CompraDTO> listaCompras = new ArrayList<CompraDTO>();
+	private Set<Compra> listaCompras;
 
 	
 	// HashCode y equals
@@ -122,16 +109,6 @@ public class UsuarioDTO implements UserDetails{
 		
 		//Retornamos la entidad
 		return usuario;
-	}
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.stream(rol.split(","))
-                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.trim().toUpperCase()))
-                .collect(Collectors.toList());
-	}
-	@Override
-	public String getUsername() {
-		return this.nombreUsuario;
 	}
 	
 }
