@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.demo.model.dto.UsuarioDTO;
 
 public interface UsuarioService {
+	
 	List<UsuarioDTO> findAll();
 
 	UsuarioDTO findById(UsuarioDTO usuarioDTO);
@@ -12,6 +13,8 @@ public interface UsuarioService {
 	int login(UsuarioDTO usuarioDTO);
 
 	UsuarioDTO findByNombreUsuario(UsuarioDTO usuarioDTO);
+
+	void delete(UsuarioDTO usuarioDTO);
 
 	//void save(UsuarioDTO usuarioDTO);
 }
