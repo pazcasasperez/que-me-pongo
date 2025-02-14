@@ -32,8 +32,6 @@ public class UsuarioRestController {
 
 	private static final Logger log = LoggerFactory.getLogger(UsuarioRestController.class);
 
-	
-
 	@Autowired
 	private UsuarioService usuarioService;
 
@@ -62,10 +60,9 @@ public class UsuarioRestController {
 		}
 	}
 
-
-	//  @PathVariable("nombreusuario") String nombreusuario,
+	// @PathVariable("nombreusuario") String nombreusuario,
 	// @PathVariable("password") String password
-	
+
 	@PostMapping("/login")
 	public ResponseEntity<Integer> login(@RequestBody UsuarioDTO usuarioDTO) {
 
@@ -83,22 +80,37 @@ public class UsuarioRestController {
 		}
 	}
 
-  @PostMapping("/add")
-    public ResponseEntity<UsuarioDTO> add(@RequestBody UsuarioDTO usuarioDTO) {
-        log.info(ArticuloRestController.class.getSimpleName() + " -- Añadir un¡ usuario ");
-       
-        usuarioDTO = usuarioService.save(usuarioDTO);
- 
-        if(usuarioDTO==null) {
-        	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        // Si lo hemos insertadp. Le devolvemos que se ha insertado 
-        // y le mandamos el articulo
-        return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
-    }
-	
+	@GetMapping("/search/{nombreUsuario}")
+	public ResponseEntity<UsuarioDTO> findByNombreUsuario(@PathVariable("nombreUsuario") String nomUsuario) {
+		log.info(UsuarioRestController.class.getSimpleName() + " - Buscamos si existe el cliente: " + nomUsuario);
+		// Obtenemos el usuario y se lo pasamos al modelo
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombreUsuario(nomUsuario);
+		usuarioDTO = usuarioService.findByNombreUsuario(usuarioDTO);
 
-	
+		log.info(usuarioDTO.toString());
+
+		if (usuarioDTO == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
+		}
+	}
+
+	@PostMapping("/add")
+	public ResponseEntity<UsuarioDTO> add(@RequestBody UsuarioDTO usuarioDTO) {
+		log.info(ArticuloRestController.class.getSimpleName() + " -- Añadir un¡ usuario ");
+
+		usuarioDTO = usuarioService.save(usuarioDTO);
+
+		if (usuarioDTO == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		// Si lo hemos insertadp. Le devolvemos que se ha insertado
+		// y le mandamos el articulo
+		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
+	}
+
 	/*
 	 * IMPLEMENTAR EL SAVE EN EL SERVICE ADD
 	 * 
@@ -133,42 +145,45 @@ public class UsuarioRestController {
 
 	/*
 	 * HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE
-
-	}*/
-	
-	/* COMO ARRIBA, FALTA IMPLEMENTAR EL SAVE
-	// Actualizar el usuario
-	 * UPDATE
-	@PutMapping () El put actualiza todos los datos del usuario (ES EL QUE SE USA, EL PATCH POCAS VECES)
-	// @PatchMapping ("/update") // En cambio, el patch solo actualiza el dato que se cambia
-	public ResponseEntity update (@RequestBody UsuarioDTO usuarioDTO){
-		
-		log.info(UsuarioRestController.class.getSimpleName() + " - actualizamos los datos del usuario");
-		
-		int resultado = usuarioService.save(usuarioDTO);
-		
-		if (resultado == 1) {
-			return new ResponseEntity<>(HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}*/
-	
-	/* HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE 
-
 	 * 
-	 * 		FOTO DEL DIA 30/01/2025
+	 * }
+	 */
+
+	/*
+	 * COMO ARRIBA, FALTA IMPLEMENTAR EL SAVE // Actualizar el usuario UPDATE
+	 * 
+	 * @PutMapping () El put actualiza todos los datos del usuario (ES EL QUE SE
+	 * USA, EL PATCH POCAS VECES) // @PatchMapping ("/update") // En cambio, el
+	 * patch solo actualiza el dato que se cambia public ResponseEntity update
+	 * (@RequestBody UsuarioDTO usuarioDTO){
+	 * 
+	 * log.info(UsuarioRestController.class.getSimpleName() +
+	 * " - actualizamos los datos del usuario");
+	 * 
+	 * int resultado = usuarioService.save(usuarioDTO);
+	 * 
+	 * if (resultado == 1) { return new ResponseEntity<>(HttpStatus.OK); } else {
+	 * return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
+	 */
+
+	/*
+	 * HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE
+	 * 
+	 * 
+	 * FOTO DEL DIA 30/01/2025
 	 * 
 	 * DELETE
-	@DeleteMapping ()
-	public ResponseEntity<String> delete (@PathVariable("idUsuario") Long idUsuario){
-		
-		log.info(UsuarioRestController.class.getSimpleName() + " - borramos los datos del usuario");
-		
-		UsuarioDTO usuarioDTO = new UsuarioDTO();
-		usuarioDTO.setId(idUsuario);
-		usuarioService.delete(usuarioDTO);
-		
-		return new ResponseEntity<>("Cliente " + usuarioDTO + (" borrado satisfactoriamente"), HttpStatus.OK);
-	}*/
+	 * 
+	 * @DeleteMapping () public ResponseEntity<String> delete
+	 * (@PathVariable("idUsuario") Long idUsuario){
+	 * 
+	 * log.info(UsuarioRestController.class.getSimpleName() +
+	 * " - borramos los datos del usuario");
+	 * 
+	 * UsuarioDTO usuarioDTO = new UsuarioDTO(); usuarioDTO.setId(idUsuario);
+	 * usuarioService.delete(usuarioDTO);
+	 * 
+	 * return new ResponseEntity<>("Cliente " + usuarioDTO +
+	 * (" borrado satisfactoriamente"), HttpStatus.OK); }
+	 */
 }
