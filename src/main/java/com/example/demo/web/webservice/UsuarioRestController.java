@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.model.dto.ArticuloDTO;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.repository.entity.Usuario;
 import com.example.demo.service.UsuarioService;
@@ -30,6 +31,8 @@ import com.example.demo.web.controller.UsuarioController;
 public class UsuarioRestController {
 
 	private static final Logger log = LoggerFactory.getLogger(UsuarioRestController.class);
+
+	
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -75,27 +78,27 @@ public class UsuarioRestController {
 			log.info("ha fallado");
 			return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			log.info("ha triunfado");
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
 
-	@GetMapping("/search/{nombreUsuario}")
-	public ResponseEntity<UsuarioDTO> findByNombreUsuario(@PathVariable("nombreUsuario") String nomUsuario) {
-		log.info(UsuarioRestController.class.getSimpleName() + " - Buscamos si existe el cliente: " + nomUsuario);
-		// Obtenemos el usuario y se lo pasamos al modelo
-		UsuarioDTO usuarioDTO = new UsuarioDTO();
-		usuarioDTO.setNombreUsuario(nomUsuario);
-		usuarioDTO = usuarioService.findByNombreUsuario(usuarioDTO);
+  @PostMapping("/add")
+    public ResponseEntity<UsuarioDTO> add(@RequestBody UsuarioDTO usuarioDTO) {
+        log.info(ArticuloRestController.class.getSimpleName() + " -- Añadir un¡ usuario ");
+       
+        usuarioDTO = usuarioService.save(usuarioDTO);
+ 
+        if(usuarioDTO==null) {
+        	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        // Si lo hemos insertadp. Le devolvemos que se ha insertado 
+        // y le mandamos el articulo
+        return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
+    }
+	
 
-		log.info(usuarioDTO.toString());
-
-		if (usuarioDTO == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
-		}
-	}
-
+	
 	/*
 	 * IMPLEMENTAR EL SAVE EN EL SERVICE ADD
 	 * 

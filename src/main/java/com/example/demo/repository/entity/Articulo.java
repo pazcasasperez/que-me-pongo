@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.print.DocFlavor.BYTE_ARRAY;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -30,7 +33,9 @@ public class Articulo {
 	private String marca;
 	private String material;
 	private String temporada;
-	private String imagen;
+	@Lob
+	@Column(columnDefinition = "LONGBLOB")
+	private byte[] imagen;
 	private String estado;
 	private boolean publicado;
 	private String descripcion;
