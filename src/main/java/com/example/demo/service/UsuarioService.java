@@ -13,5 +13,8 @@ public interface UsuarioService {
 
   	UsuarioDTO findByNombreUsuario(UsuarioDTO usuarioDTO);
 
+UsuarioDTO save(UsuarioDTO usuarioDTO);
+
+
 	//void save(UsuarioDTO usuarioDTO);
 }

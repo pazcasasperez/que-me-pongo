@@ -90,14 +90,22 @@ public class UsuarioServiceImpl implements UsuarioService{
 				+ usuarioDTO.toString());
 		return usuarioDTO;
 	}
+
 	
-/*
+
 	@Override
-	public void save(UsuarioDTO usuarioDTO) {
+	public UsuarioDTO save(UsuarioDTO usuarioDTO) {
 		
 		log.info(UsuarioServiceImpl.class.getName()+ " - Guardamos el usuario");
 		
 		Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
+
 		usuarioRepository.save(usuario);
-	}*/
+
+		log.info(UsuarioServiceImpl.class.getName()+ " -usuario");
+
+		return usuarioDTO;
+
+	}
+
 }

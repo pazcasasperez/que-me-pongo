@@ -19,7 +19,7 @@ public class ArticuloDTO implements Serializable {
 	private String marca;
 	private String material;
 	private String temporada;
-	private String imagen;
+	private byte[] imagen;
 	private String estado;
 	private boolean publicado;
 	private String descripcion;

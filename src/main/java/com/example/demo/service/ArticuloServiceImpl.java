@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -76,4 +77,13 @@ public class ArticuloServiceImpl implements ArticuloService {
 		articulo.setActivo(false);
 		articuloRepository.save(articulo);
 	}
+
+	public byte[] getImage(Long articuloId) {
+		// Lógica para obtener la imagen del artículo
+		// Puede ser desde el sistema de archivos o base de datos
+		// Aquí solo es un ejemplo
+		Articulo articulo = articuloRepository.findById(articuloId).orElseThrow(() -> new RuntimeException("Artículo no encontrado"));
+		return articulo.getImagen();
+	}
+
 }

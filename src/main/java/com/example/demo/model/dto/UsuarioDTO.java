@@ -110,5 +110,6 @@ public class UsuarioDTO implements Serializable{
 		//Retornamos la entidad
 		return usuario;
 	}
+   
 	
 }
