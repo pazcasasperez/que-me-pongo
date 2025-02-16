@@ -59,8 +59,8 @@ public class ArticuloServiceImpl implements ArticuloService {
 	public ArticuloDTO save(ArticuloDTO articuloDTO) {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Guardamos en el servicio un nuevo articulo");
 		log.info("ArticuloDTO " + articuloDTO.toString());
+		//log.info("Usuario: " + articuloDTO.getUsuario().toString());
 		Articulo articulo = ArticuloMapper.INSTANCE.toEntity(articuloDTO);
-
 		Usuario u = UsuarioMapper.INSTACE.toEntity(articuloDTO.getUsuario());
         articulo.setUsuario(u);
 

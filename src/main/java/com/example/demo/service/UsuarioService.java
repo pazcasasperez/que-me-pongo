@@ -11,7 +11,7 @@ public interface UsuarioService {
 
 	int login(UsuarioDTO usuarioDTO);
 
-  UsuarioDTO findByNombreUsuario(UsuarioDTO usuarioDTO);
+  	UsuarioDTO findByNombreUsuario(UsuarioDTO usuarioDTO);
 
 UsuarioDTO save(UsuarioDTO usuarioDTO);
 
