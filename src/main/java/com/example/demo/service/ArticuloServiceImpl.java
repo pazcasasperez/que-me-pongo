@@ -23,68 +23,81 @@ public class ArticuloServiceImpl implements ArticuloService {
 	private ArticuloRepository articuloRepository;
 	private static final Logger log = LoggerFactory.getLogger(ArticuloServiceImpl.class);
 	@Autowired
-	private final ArticuloMapper articuloMapper=null;
+	private final ArticuloMapper articuloMapper = null;
 
 	@Override
 	public List<ArticuloDTO> findAll() {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos la lista de articulos al servicio");
-		
+
 		List<Articulo> listaArticulos = articuloRepository.findAll();/*
-		List<ArticuloDTO> listaArticulosDTO = new ArrayList<ArticuloDTO>();
-		for(Articulo a : listaArticulos) {
-			ArticuloDTO art =articuloMapper.toDTO(a);
-			//ArticuloDTO art = ArticuloMapper.INSTANCE.toDTO(a);
-			listaArticulosDTO.add(art);
-			//listaArticulosDTO.add(ArticuloDTO.convertToDTO(a));
-		}*/
-		//listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toSet());
+																		 * List<ArticuloDTO> listaArticulosDTO = new
+																		 * ArrayList<ArticuloDTO>();
+																		 * for(Articulo a : listaArticulos) {
+																		 * ArticuloDTO art =articuloMapper.toDTO(a);
+																		 * //ArticuloDTO art =
+																		 * ArticuloMapper.INSTANCE.toDTO(a);
+																		 * listaArticulosDTO.add(art);
+																		 * //listaArticulosDTO.add(ArticuloDTO.
+																		 * convertToDTO(a));
+																		 * }
+																		 */
+		// listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toSet());
 		return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
-		//return listaArticulosDTO;
+		// return listaArticulosDTO;
 	}
 
 	@Override
 	public ArticuloDTO findById(ArticuloDTO articuloDTO) {
-		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos el articulo con id " + articuloDTO.getId() + " al servicio");
+		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos el articulo con id " + articuloDTO.getId()
+				+ " al servicio");
 
 		Articulo a = articuloRepository.findById(articuloDTO.getId()).get();
 		articuloDTO = ArticuloDTO.convertToDTO(a);
-		
+
 		return articuloDTO;
 	}
+
 	/**
-	 *  Vamos a guardar el articulo, como hemos realizado hasta ahora, pero devolveremos
-	 *  un articulo al controlador, para poder controlar el error
+	 * Vamos a guardar el articulo, como hemos realizado hasta ahora, pero
+	 * devolveremos
+	 * un articulo al controlador, para poder controlar el error
 	 */
 	@Override
 	public ArticuloDTO save(ArticuloDTO articuloDTO) {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Guardamos en el servicio un nuevo articulo");
 		log.info("ArticuloDTO " + articuloDTO.toString());
-		//log.info("Usuario: " + articuloDTO.getUsuario().toString());
+		// log.info("Usuario: " + articuloDTO.getUsuario().toString());
 		Articulo articulo = ArticuloMapper.INSTANCE.toEntity(articuloDTO);
 		Usuario u = UsuarioMapper.INSTACE.toEntity(articuloDTO.getUsuario());
-        articulo.setUsuario(u);
+		articulo.setUsuario(u);
 
 		Articulo art = articuloRepository.save(articulo);
 		articuloDTO = ArticuloMapper.INSTANCE.toDTO(art);
 		log.info("ArticuloDTO MYSQL" + articuloDTO.toString());
-		return articuloDTO ;
+		return articuloDTO;
 	}
 
 	@Override
 	public void delete(ArticuloDTO articuloDTO) {
-		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Desactivamos en el servicio el articulo: " + articuloDTO.getId());
+		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Desactivamos en el servicio el articulo: "
+				+ articuloDTO.getId());
 		Articulo articulo = articuloRepository.findById(articuloDTO.getId()).get();
 		articulo.setActivo(false);
 		articuloRepository.save(articulo);
 	}
 
-
 	@Override
 	public List<ArticuloDTO> findByTipo(String tipo) {
 		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Buscamos los articulos de tipo " + tipo);
 
-		List<Articulo> listaArticulos = articuloRepository.findByTipo(tipo);
-		return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
-	}
+		List<Articulo> listaArticulos = articuloRepository.findAllByTipo(tipo);
+		List<ArticuloDTO> listaArticulosDTO = new ArrayList<ArticuloDTO>();
+		for (Articulo a : listaArticulos) {
+			ArticuloDTO art = articuloMapper.toDTO(a);
+			listaArticulosDTO.add(art);
+		}
 
+		return listaArticulosDTO;
+
+	}
 }
