@@ -78,12 +78,13 @@ public class ArticuloServiceImpl implements ArticuloService {
 		articuloRepository.save(articulo);
 	}
 
-	public byte[] getImage(Long articuloId) {
-		// Lógica para obtener la imagen del artículo
-		// Puede ser desde el sistema de archivos o base de datos
-		// Aquí solo es un ejemplo
-		Articulo articulo = articuloRepository.findById(articuloId).orElseThrow(() -> new RuntimeException("Artículo no encontrado"));
-		return articulo.getImagen();
+
+	@Override
+	public List<ArticuloDTO> findByTipo(String tipo) {
+		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Buscamos los articulos de tipo " + tipo);
+
+		List<Articulo> listaArticulos = articuloRepository.findByTipo(tipo);
+		return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
 	}
 
 }
