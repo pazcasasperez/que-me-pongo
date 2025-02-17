@@ -101,6 +101,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
 
 		usuarioRepository.save(usuario);
+
 		log.info(UsuarioServiceImpl.class.getName()+ " -usuario");
 
 		return usuarioDTO;
