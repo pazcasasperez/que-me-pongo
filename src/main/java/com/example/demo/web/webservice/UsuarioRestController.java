@@ -59,7 +59,7 @@ public class UsuarioRestController {
 			return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 		}
 	}
-
+	
 	// @PathVariable("nombreusuario") String nombreusuario,
 	// @PathVariable("password") String password
 
