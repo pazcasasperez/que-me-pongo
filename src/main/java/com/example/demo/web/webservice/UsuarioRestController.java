@@ -73,7 +73,7 @@ public class UsuarioRestController {
 		} else {
 			return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 		}
-
+	}
 	@PostMapping("/login")
 	public ResponseEntity<Integer> login(@RequestBody UsuarioDTO usuarioDTO) {
 
@@ -125,7 +125,7 @@ public class UsuarioRestController {
 		
 		usuarioDTO = usuarioService.save(usuarioDTO);
 		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
-
+	}
 	@PostMapping("/add")
 	public ResponseEntity<UsuarioDTO> add(@RequestBody UsuarioDTO usuarioDTO) {
 		log.info(ArticuloRestController.class.getSimpleName() + " -- Añadir un¡ usuario ");
@@ -138,7 +138,7 @@ public class UsuarioRestController {
 		// Si lo hemos insertadp. Le devolvemos que se ha insertado
 		// y le mandamos el articulo
 		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
-
+	}
 	@DeleteMapping("/{idUsuario}")
 	public ResponseEntity<String> delete(@PathVariable("idUsuario") Long idUsuario) {
 
