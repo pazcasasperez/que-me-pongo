@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.repository.dao.UsuarioRepository;
+import com.example.demo.repository.entity.Articulo;
 import com.example.demo.repository.entity.Usuario;
 import com.example.demo.service.mapper.ArticuloMapper;
 import com.example.demo.service.mapper.UsuarioMapper;
@@ -97,6 +98,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void delete(UsuarioDTO usuarioDTO) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public UsuarioDTO save(UsuarioDTO usuarioDTO) {
+
+		log.info(UsuarioServiceImpl.class.getSimpleName() +" --Guardamos el nuevo usuario en la base de datos");
+		
+		log.info("Este es el usuarioDTO" + usuarioDTO.toString());
+		
+		Usuario usuario = UsuarioMapper.INSTACE.toEntity(usuarioDTO);
+		
+		Usuario u = usuarioRepository.save(usuario);
+		usuarioDTO = UsuarioMapper.INSTACE.toDTO(u);
+		log.info("UsuarioDTO MYSQL" + usuarioDTO.toString());
+		return usuarioDTO;
 	}
 
 	/*

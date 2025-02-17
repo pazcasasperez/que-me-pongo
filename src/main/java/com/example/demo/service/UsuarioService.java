@@ -16,5 +16,7 @@ public interface UsuarioService {
 
 	void delete(UsuarioDTO usuarioDTO);
 
+	UsuarioDTO save(UsuarioDTO usuarioDTO);
+
 	//void save(UsuarioDTO usuarioDTO);
 }

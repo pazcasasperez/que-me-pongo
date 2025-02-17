@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.model.dto.ArticuloDTO;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.repository.entity.Usuario;
 import com.example.demo.service.UsuarioService;
@@ -35,32 +36,32 @@ public class UsuarioRestController {
 	private UsuarioService usuarioService;
 
 	@GetMapping("")
-	public ResponseEntity<List<UsuarioDTO>> findAll(){
+	public ResponseEntity<List<UsuarioDTO>> findAll() {
 		log.info(UsuarioRestController.class.getSimpleName() + " -- listamos todos los usuarios");
-		
+
 		List<UsuarioDTO> listaUsuariosDTO = usuarioService.findAll();
-		
-		return new ResponseEntity<>(listaUsuariosDTO, HttpStatus.OK); 
+
+		return new ResponseEntity<>(listaUsuariosDTO, HttpStatus.OK);
 	}
 
 	/*
-	//Obtenemos los usuarios por get
-	@GetMapping
-	public List<UsuarioDTO> findAll() {
-		log.info(UsuarioRestController.class.getSimpleName() + " - listamos todos los usuarios");
+	 * //Obtenemos los usuarios por get
+	 * 
+	 * @GetMapping public List<UsuarioDTO> findAll() {
+	 * log.info(UsuarioRestController.class.getSimpleName() +
+	 * " - listamos todos los usuarios");
+	 * 
+	 * ModelAndView mv = new ModelAndView("usuarios"); List<UsuarioDTO>
+	 * listaUsuarioDTO = usuarioService.findAll();
+	 * 
+	 * return listaUsuarioDTO; }
+	 */
 
-		ModelAndView mv = new ModelAndView("usuarios");
-		List<UsuarioDTO> listaUsuarioDTO = usuarioService.findAll();
-
-		return listaUsuarioDTO;
-	}
-	*/
-	
 	@GetMapping("/{idUsuario}")
 	public ResponseEntity<UsuarioDTO> findById(@PathVariable("idUsuario") Long idUsuario) {
 
-		log.info(UsuarioRestController.class.getSimpleName() + " -- listamos los usuarios con el id " +idUsuario);
-				
+		log.info(UsuarioRestController.class.getSimpleName() + " -- listamos los usuarios con el id " + idUsuario);
+
 		// Obtenemos el usuario y se lo pasamos al modelo
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
 		usuarioDTO.setId(idUsuario);
@@ -72,25 +73,21 @@ public class UsuarioRestController {
 		} else {
 			return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 		}
-		
+
 		/*
-		UsuarioDTO usuarioDTO = new UsuarioDTO();
-		usuarioDTO.setId(idUsuario);
-		usuarioDTO = usuarioService.findById(usuarioDTO);
-		
-		//Aqui hacemos que si l usuario es nulo, lo mandamos por la consola
-		if (usuarioDTO == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		
-		return new ResponseEntity<>(HttpStatus.OK);
-		*/
+		 * UsuarioDTO usuarioDTO = new UsuarioDTO(); usuarioDTO.setId(idUsuario);
+		 * usuarioDTO = usuarioService.findById(usuarioDTO);
+		 * 
+		 * //Aqui hacemos que si l usuario es nulo, lo mandamos por la consola if
+		 * (usuarioDTO == null) { return new ResponseEntity<>(HttpStatus.NOT_FOUND); }
+		 * 
+		 * return new ResponseEntity<>(HttpStatus.OK);
+		 */
 	}
 
-
-	//  @PathVariable("nombreusuario") String nombreusuario,
+	// @PathVariable("nombreusuario") String nombreusuario,
 	// @PathVariable("password") String password
-	
+
 	// Hacemos el login
 	@PostMapping("/login")
 	public ResponseEntity<Integer> login(@RequestBody UsuarioDTO usuarioDTO) {
@@ -108,8 +105,6 @@ public class UsuarioRestController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
-	
-	
 
 	@GetMapping("/search/{nombreUsuario}")
 	public ResponseEntity<UsuarioDTO> findByNombreUsuario(@PathVariable("nombreUsuario") String nomUsuario) {
@@ -128,20 +123,42 @@ public class UsuarioRestController {
 		}
 	}
 
-	/*
-	 * IMPLEMENTAR EL SAVE EN EL SERVICE ADD
-	 * 
-	 * @PostMapping () public ResponseEntity add (@RequestBody UsuarioDTO
-	 * usuarioDTO){
-	 * 
-	 * log.info(UsuarioRestController.class.getSimpleName() +
-	 * " - creamos los datos del usuario");
-	 * 
-	 * int resultado = usuarioService.save(usuarioDTO);
-	 * 
-	 * if (resultado == 1) { return new ResponseEntity<>(HttpStatus.OK); } else {
-	 * return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
-	 */
+	@PostMapping("")
+	public ResponseEntity<UsuarioDTO> add(@RequestBody UsuarioDTO usuarioDTO) {
+
+		log.info(UsuarioRestController.class.getSimpleName() + " - creamos los datos del usuario");
+
+		usuarioDTO = usuarioService.save(usuarioDTO);
+		
+		//int resultado = usuarioService.save(usuarioDTO);
+
+		if (usuarioDTO == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} else {
+			log.info("USUARIO CORRECTAMENTE INSERTADO");
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+	}
+	
+	@PutMapping("")
+	public ResponseEntity<UsuarioDTO> update(@RequestBody UsuarioDTO usuarioDTO){
+		
+		log.info(UsuarioRestController.class.getSimpleName() + "-- Actualizamos el usuario: " + usuarioDTO.getNombreUsuario());
+		
+		// Buscamos el usuario, por medio del servicio para ver que existe realmente
+		UsuarioDTO usuarioBDTO = new UsuarioDTO();
+		usuarioBDTO.setId(usuarioDTO.getId());
+		usuarioBDTO = usuarioService.findById(usuarioBDTO);
+		
+		// En el caso de que el usuario no existe, mandamos un not_found
+		if (usuarioBDTO == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		usuarioDTO = usuarioService.save(usuarioDTO);
+		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
+		
+	}
 
 	/*
 	 * COMO ARRIBA, FALTA IMPLEMENTAR EL SAVE // Actualizar el usuario UPDATE
@@ -162,39 +179,39 @@ public class UsuarioRestController {
 
 	/*
 	 * HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE
+	 * 
+	 * }
+	 */
 
-	}*/
-	
-	/* COMO ARRIBA, FALTA IMPLEMENTAR EL SAVE
-	// Actualizar el usuario
-	 * UPDATE
-	@PutMapping () El put actualiza todos los datos del usuario (ES EL QUE SE USA, EL PATCH POCAS VECES)
-	// @PatchMapping ("/update") // En cambio, el patch solo actualiza el dato que se cambia
-	public ResponseEntity update (@RequestBody UsuarioDTO usuarioDTO){
-		
-		log.info(UsuarioRestController.class.getSimpleName() + " - actualizamos los datos del usuario");
-		
-		int resultado = usuarioService.save(usuarioDTO);
-		
-		if (resultado == 1) {
-			return new ResponseEntity<>(HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}*/
-	
-	// HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE 
+	/*
+	 * COMO ARRIBA, FALTA IMPLEMENTAR EL SAVE // Actualizar el usuario UPDATE
+	 * 
+	 * @PutMapping () El put actualiza todos los datos del usuario (ES EL QUE SE
+	 * USA, EL PATCH POCAS VECES) // @PatchMapping ("/update") // En cambio, el
+	 * patch solo actualiza el dato que se cambia public ResponseEntity update
+	 * (@RequestBody UsuarioDTO usuarioDTO){
+	 * 
+	 * log.info(UsuarioRestController.class.getSimpleName() +
+	 * " - actualizamos los datos del usuario");
+	 * 
+	 * int resultado = usuarioService.save(usuarioDTO);
+	 * 
+	 * if (resultado == 1) { return new ResponseEntity<>(HttpStatus.OK); } else {
+	 * return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
+	 */
+
+	// HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE
 	// FOTO DEL DIA 30/01/2025
 	// Implemetamos el delete
-	@DeleteMapping ("/{idUsuario}")
-	public ResponseEntity<String> delete (@PathVariable("idUsuario") Long idUsuario){
-		
+	@DeleteMapping("/{idUsuario}")
+	public ResponseEntity<String> delete(@PathVariable("idUsuario") Long idUsuario) {
+
 		log.info(UsuarioRestController.class.getSimpleName() + " - borramos los datos del usuario");
-		
+
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
 		usuarioDTO.setId(idUsuario);
 		usuarioService.delete(usuarioDTO);
-		
+
 		return new ResponseEntity<>("Usuario " + usuarioDTO + (" borrado satisfactoriamente"), HttpStatus.OK);
 	}
 }
