@@ -35,33 +35,44 @@ public class UsuarioRestController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@GetMapping
-	public List<UsuarioDTO> findAll() {
-		log.info(UsuarioRestController.class.getSimpleName() + " - listamos todos los usuarios");
+	@GetMapping("")
+	public ResponseEntity<List<UsuarioDTO>> findAll() {
+		log.info(UsuarioRestController.class.getSimpleName() + " -- listamos todos los usuarios");
 
-		ModelAndView mv = new ModelAndView("usuarios");
-		List<UsuarioDTO> listaUsuarioDTO = usuarioService.findAll();
+		List<UsuarioDTO> listaUsuariosDTO = usuarioService.findAll();
 
-		return listaUsuarioDTO;
+		return new ResponseEntity<>(listaUsuariosDTO, HttpStatus.OK);
 	}
 
+	/*
+	 * //Obtenemos los usuarios por get
+	 * 
+	 * @GetMapping public List<UsuarioDTO> findAll() {
+	 * log.info(UsuarioRestController.class.getSimpleName() +
+	 * " - listamos todos los usuarios");
+	 * 
+	 * ModelAndView mv = new ModelAndView("usuarios"); List<UsuarioDTO>
+	 * listaUsuarioDTO = usuarioService.findAll();
+	 * 
+	 * return listaUsuarioDTO; }
+	 */
+
 	@GetMapping("/{idUsuario}")
-	public ResponseEntity<UsuarioDTO> findById(@PathVariable("idUsurario") Long idUsuario) {
+	public ResponseEntity<UsuarioDTO> findById(@PathVariable("idUsuario") Long idUsuario) {
+
+		log.info(UsuarioRestController.class.getSimpleName() + " -- listamos los usuarios con el id " + idUsuario);
 
 		// Obtenemos el usuario y se lo pasamos al modelo
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
 		usuarioDTO.setId(idUsuario);
 		usuarioDTO = usuarioService.findById(usuarioDTO);
 
+		// Nos aseguramos de que no sea null el usuario
 		if (usuarioDTO == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 		}
-	}
-	
-	// @PathVariable("nombreusuario") String nombreusuario,
-	// @PathVariable("password") String password
 
 	@PostMapping("/login")
 	public ResponseEntity<Integer> login(@RequestBody UsuarioDTO usuarioDTO) {
@@ -97,6 +108,24 @@ public class UsuarioRestController {
 		}
 	}
 
+	@PutMapping("")
+	public ResponseEntity<UsuarioDTO> update(@RequestBody UsuarioDTO usuarioDTO){
+		
+		log.info(UsuarioRestController.class.getSimpleName() + "-- Actualizamos el usuario: " + usuarioDTO.getNombreUsuario());
+		
+		// Buscamos el usuario, por medio del servicio para ver que existe realmente
+		UsuarioDTO usuarioBDTO = new UsuarioDTO();
+		usuarioBDTO.setId(usuarioDTO.getId());
+		usuarioBDTO = usuarioService.findById(usuarioBDTO);
+		
+		// En el caso de que el usuario no existe, mandamos un not_found
+		if (usuarioBDTO == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		usuarioDTO = usuarioService.save(usuarioDTO);
+		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
+
 	@PostMapping("/add")
 	public ResponseEntity<UsuarioDTO> add(@RequestBody UsuarioDTO usuarioDTO) {
 		log.info(ArticuloRestController.class.getSimpleName() + " -- Añadir un¡ usuario ");
@@ -109,81 +138,16 @@ public class UsuarioRestController {
 		// Si lo hemos insertadp. Le devolvemos que se ha insertado
 		// y le mandamos el articulo
 		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
+
+	@DeleteMapping("/{idUsuario}")
+	public ResponseEntity<String> delete(@PathVariable("idUsuario") Long idUsuario) {
+
+		log.info(UsuarioRestController.class.getSimpleName() + " - borramos los datos del usuario");
+
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setId(idUsuario);
+		usuarioService.delete(usuarioDTO);
+
+		return new ResponseEntity<>("Usuario " + usuarioDTO + (" borrado satisfactoriamente"), HttpStatus.OK);
 	}
-
-	/*
-	 * IMPLEMENTAR EL SAVE EN EL SERVICE ADD
-	 * 
-	 * @PostMapping () public ResponseEntity add (@RequestBody UsuarioDTO
-	 * usuarioDTO){
-	 * 
-	 * log.info(UsuarioRestController.class.getSimpleName() +
-	 * " - creamos los datos del usuario");
-	 * 
-	 * int resultado = usuarioService.save(usuarioDTO);
-	 * 
-	 * if (resultado == 1) { return new ResponseEntity<>(HttpStatus.OK); } else {
-	 * return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
-	 */
-
-	/*
-	 * COMO ARRIBA, FALTA IMPLEMENTAR EL SAVE // Actualizar el usuario UPDATE
-	 * 
-	 * @PutMapping () El put actualiza todos los datos del usuario (ES EL QUE SE
-	 * USA, EL PATCH POCAS VECES) // @PatchMapping ("/update") // En cambio, el
-	 * patch solo actualiza el dato que se cambia public ResponseEntity update
-	 * (@RequestBody UsuarioDTO usuarioDTO){
-	 * 
-	 * log.info(UsuarioRestController.class.getSimpleName() +
-	 * " - actualizamos los datos del usuario");
-	 * 
-	 * int resultado = usuarioService.save(usuarioDTO);
-	 * 
-	 * if (resultado == 1) { return new ResponseEntity<>(HttpStatus.OK); } else {
-	 * return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
-	 */
-
-	/*
-	 * HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE
-	 * 
-	 * }
-	 */
-
-	/*
-	 * COMO ARRIBA, FALTA IMPLEMENTAR EL SAVE // Actualizar el usuario UPDATE
-	 * 
-	 * @PutMapping () El put actualiza todos los datos del usuario (ES EL QUE SE
-	 * USA, EL PATCH POCAS VECES) // @PatchMapping ("/update") // En cambio, el
-	 * patch solo actualiza el dato que se cambia public ResponseEntity update
-	 * (@RequestBody UsuarioDTO usuarioDTO){
-	 * 
-	 * log.info(UsuarioRestController.class.getSimpleName() +
-	 * " - actualizamos los datos del usuario");
-	 * 
-	 * int resultado = usuarioService.save(usuarioDTO);
-	 * 
-	 * if (resultado == 1) { return new ResponseEntity<>(HttpStatus.OK); } else {
-	 * return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
-	 */
-
-	/*
-	 * HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE
-	 * 
-	 * 
-	 * FOTO DEL DIA 30/01/2025
-	 * 
-	 * DELETE
-	 * 
-	 * @DeleteMapping () public ResponseEntity<String> delete
-	 * (@PathVariable("idUsuario") Long idUsuario){
-	 * 
-	 * log.info(UsuarioRestController.class.getSimpleName() +
-	 * " - borramos los datos del usuario");
-	 * 
-	 * UsuarioDTO usuarioDTO = new UsuarioDTO(); usuarioDTO.setId(idUsuario);
-	 * usuarioService.delete(usuarioDTO);
-	 * 
-	 * return new ResponseEntity<>("Cliente " + usuarioDTO +
-	 * (" borrado satisfactoriamente"), HttpStatus.OK); }
-	 */
 }
