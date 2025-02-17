@@ -58,11 +58,10 @@ public class ArticuloRestController {
         // clienteDTO.setId(idCliente);
         // articuloDTO.setCliente(clienteDTO);
          */
-
-        
+        log.info(articuloDTO.toString());
         //Almacenamos la devolucion del guardado que nos envia el servicio para 
         // poder comprobar que ha funcionado 
-        articuloDTO = articuloService.save(articuloDTO);
+        //articuloDTO = articuloService.save(articuloDTO);
         //Miro si lo q viene del service esta vacio o me devuelve el objeto insertado
         //Si vuelve vacion mandamos un mensaje al front de que ha ido mal
         if(articuloDTO==null) {
