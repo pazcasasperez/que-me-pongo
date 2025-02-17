@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.dto.ArticuloDTO;
 import com.example.demo.service.ArticuloService;
 import com.example.demo.web.controller.ArticuloController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -106,11 +104,9 @@ public class ArticuloRestController {
         return new ResponseEntity<>("Cliente borrado satisfactoriamente", HttpStatus.OK);
 
     }
-
-
     @GetMapping("/tipo/{tipo}")
     public ResponseEntity<List<ArticuloDTO>> findByTipo(@PathVariable("tipo") String tipo) {
-        log.info(ArticuloRestController.class.getSimpleName() + " -- Buscamos los articulos de tipo " + tipo);
+        log.info(ArticuloRestController.class.getSimpleName() + " -- Buscamos los artículos de tipo " + tipo);
         List<ArticuloDTO> listaArticulosDTO = articuloService.findByTipo(tipo);
         return new ResponseEntity<>(listaArticulosDTO, HttpStatus.OK);
     }

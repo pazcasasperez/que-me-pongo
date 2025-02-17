@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.repository.entity.Articulo;
-import com.example.demo.repository.entity.ArticuloTransaccion;
 
 import jakarta.transaction.Transactional;
 
@@ -22,7 +21,7 @@ public interface ArticuloRepository extends JpaRepository <Articulo, Long> {
 	 @Query(value = "select * from articulos where tipo='zapatos';", nativeQuery = true)
 	 public  List<Articulo> findAllByZapatos();
 	 
-	 @Query(value = "select * from articulos where tipo=:tipoR;", nativeQuery = true)
-	 public  List<Articulo> findAllByTipo(@Param("tipoR") String tipoR);
+	 @Query(value = "select * from articulos where tipo=:tipo;", nativeQuery = true)
+	 public  List<Articulo> findAllByTipo(@Param("tipo") String tipo);
 
 }

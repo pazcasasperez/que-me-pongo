@@ -88,16 +88,22 @@ public class ArticuloServiceImpl implements ArticuloService {
 
 	@Override
 	public List<ArticuloDTO> findByTipo(String tipo) {
-		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Buscamos los articulos de tipo " + tipo);
-
+		// Log para asegurarse de que el valor de tipo recibido es el esperado
+		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Buscamos los artículos de tipo " + tipo);
+	
+		// Ejecutamos la consulta para obtener los artículos por tipo
 		List<Articulo> listaArticulos = articuloRepository.findAllByTipo(tipo);
-		List<ArticuloDTO> listaArticulosDTO = new ArrayList<ArticuloDTO>();
+	
+		// Convertimos la lista de artículos en una lista de DTOs
+		List<ArticuloDTO> listaArticulosDTO = new ArrayList<>();
+	
 		for (Articulo a : listaArticulos) {
-			ArticuloDTO art = articuloMapper.toDTO(a);
+			// Usamos el Mapper para convertir cada artículo en su correspondiente DTO
+			ArticuloDTO art = ArticuloMapper.INSTANCE.toDTO(a);
 			listaArticulosDTO.add(art);
 		}
-
+	
 		return listaArticulosDTO;
-
 	}
+	
 }
