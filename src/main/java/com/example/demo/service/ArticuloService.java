@@ -17,6 +17,7 @@ public interface ArticuloService {
 
 	void delete(ArticuloDTO articuloDTO);
 
-    byte[] getImage(Long id);
+
+    List<ArticuloDTO> findByTipo(String tipo);
 
 }
