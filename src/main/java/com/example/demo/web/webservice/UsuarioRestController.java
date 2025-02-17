@@ -74,21 +74,6 @@ public class UsuarioRestController {
 			return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 		}
 
-		/*
-		 * UsuarioDTO usuarioDTO = new UsuarioDTO(); usuarioDTO.setId(idUsuario);
-		 * usuarioDTO = usuarioService.findById(usuarioDTO);
-		 * 
-		 * //Aqui hacemos que si l usuario es nulo, lo mandamos por la consola if
-		 * (usuarioDTO == null) { return new ResponseEntity<>(HttpStatus.NOT_FOUND); }
-		 * 
-		 * return new ResponseEntity<>(HttpStatus.OK);
-		 */
-	}
-
-	// @PathVariable("nombreusuario") String nombreusuario,
-	// @PathVariable("password") String password
-
-	// Hacemos el login
 	@PostMapping("/login")
 	public ResponseEntity<Integer> login(@RequestBody UsuarioDTO usuarioDTO) {
 
@@ -123,23 +108,6 @@ public class UsuarioRestController {
 		}
 	}
 
-	@PostMapping("")
-	public ResponseEntity<UsuarioDTO> add(@RequestBody UsuarioDTO usuarioDTO) {
-
-		log.info(UsuarioRestController.class.getSimpleName() + " - creamos los datos del usuario");
-
-		usuarioDTO = usuarioService.save(usuarioDTO);
-		
-		//int resultado = usuarioService.save(usuarioDTO);
-
-		if (usuarioDTO == null) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} else {
-			log.info("USUARIO CORRECTAMENTE INSERTADO");
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
-	}
-	
 	@PutMapping("")
 	public ResponseEntity<UsuarioDTO> update(@RequestBody UsuarioDTO usuarioDTO){
 		
@@ -157,52 +125,20 @@ public class UsuarioRestController {
 		
 		usuarioDTO = usuarioService.save(usuarioDTO);
 		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
-		
-	}
 
-	/*
-	 * COMO ARRIBA, FALTA IMPLEMENTAR EL SAVE // Actualizar el usuario UPDATE
-	 * 
-	 * @PutMapping () El put actualiza todos los datos del usuario (ES EL QUE SE
-	 * USA, EL PATCH POCAS VECES) // @PatchMapping ("/update") // En cambio, el
-	 * patch solo actualiza el dato que se cambia public ResponseEntity update
-	 * (@RequestBody UsuarioDTO usuarioDTO){
-	 * 
-	 * log.info(UsuarioRestController.class.getSimpleName() +
-	 * " - actualizamos los datos del usuario");
-	 * 
-	 * int resultado = usuarioService.save(usuarioDTO);
-	 * 
-	 * if (resultado == 1) { return new ResponseEntity<>(HttpStatus.OK); } else {
-	 * return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
-	 */
+	@PostMapping("/add")
+	public ResponseEntity<UsuarioDTO> add(@RequestBody UsuarioDTO usuarioDTO) {
+		log.info(ArticuloRestController.class.getSimpleName() + " -- Añadir un¡ usuario ");
 
-	/*
-	 * HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE
-	 * 
-	 * }
-	 */
+		usuarioDTO = usuarioService.save(usuarioDTO);
 
-	/*
-	 * COMO ARRIBA, FALTA IMPLEMENTAR EL SAVE // Actualizar el usuario UPDATE
-	 * 
-	 * @PutMapping () El put actualiza todos los datos del usuario (ES EL QUE SE
-	 * USA, EL PATCH POCAS VECES) // @PatchMapping ("/update") // En cambio, el
-	 * patch solo actualiza el dato que se cambia public ResponseEntity update
-	 * (@RequestBody UsuarioDTO usuarioDTO){
-	 * 
-	 * log.info(UsuarioRestController.class.getSimpleName() +
-	 * " - actualizamos los datos del usuario");
-	 * 
-	 * int resultado = usuarioService.save(usuarioDTO);
-	 * 
-	 * if (resultado == 1) { return new ResponseEntity<>(HttpStatus.OK); } else {
-	 * return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
-	 */
+		if (usuarioDTO == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		// Si lo hemos insertadp. Le devolvemos que se ha insertado
+		// y le mandamos el articulo
+		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 
-	// HAY QUE IMPLEMENTAR EL DELETE EN EL SERVICE
-	// FOTO DEL DIA 30/01/2025
-	// Implemetamos el delete
 	@DeleteMapping("/{idUsuario}")
 	public ResponseEntity<String> delete(@PathVariable("idUsuario") Long idUsuario) {
 

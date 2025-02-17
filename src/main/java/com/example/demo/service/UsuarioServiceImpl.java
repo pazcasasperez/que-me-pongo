@@ -94,6 +94,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioDTO;
 	}
 
+
 	@Override
 	public void delete(UsuarioDTO usuarioDTO) {
 		// TODO Auto-generated method stub
@@ -105,8 +106,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		log.info(UsuarioServiceImpl.class.getSimpleName() +" --Guardamos el nuevo usuario en la base de datos");
 		
-		log.info("Este es el usuarioDTO" + usuarioDTO.toString());
-		
 		Usuario usuario = UsuarioMapper.INSTACE.toEntity(usuarioDTO);
 		
 		Usuario u = usuarioRepository.save(usuario);
@@ -114,14 +113,5 @@ public class UsuarioServiceImpl implements UsuarioService {
 		log.info("UsuarioDTO MYSQL" + usuarioDTO.toString());
 		return usuarioDTO;
 	}
-
-	/*
-	 * @Override public void save(UsuarioDTO usuarioDTO) {
-	 * 
-	 * log.info(UsuarioServiceImpl.class.getName()+ " - Guardamos el usuario");
-	 * 
-	 * Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
-	 * usuarioRepository.save(usuario); }
-	 */
 
 }
