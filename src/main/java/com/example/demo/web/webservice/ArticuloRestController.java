@@ -51,6 +51,12 @@ public class ArticuloRestController {
         // y le mandamos el articulo
         return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
     }
+    @GetMapping("/usuarios/{nombreUsuario}")
+    public ResponseEntity<List<ArticuloDTO>> findByNombreUsuario(@PathVariable("nombreUsuario") String nombreUsuario) {
+        log.info(ArticuloRestController.class.getSimpleName() + " -- Listando los artículos del cliente " + nombreUsuario);
+        List<ArticuloDTO> listaArticulosDTO = articuloService.findByNombreUsuario(nombreUsuario);
+        return new ResponseEntity<>(listaArticulosDTO, HttpStatus.OK);
+    }
 
     // Faltaria pasarle el cliente, y meterlo en el articulo
     @PostMapping("")
@@ -61,7 +67,6 @@ public class ArticuloRestController {
          * // clienteDTO.setId(idCliente);
          * // articuloDTO.setCliente(clienteDTO);
          */
-
         // Almacenamos la devolucion del guardado que nos envia el servicio para
         // poder comprobar que ha funcionado
         articuloDTO = articuloService.save(articuloDTO);
@@ -69,6 +74,7 @@ public class ArticuloRestController {
         // Si vuelve vacion mandamos un mensaje al front de que ha ido mal
         if (articuloDTO == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         }
         // Si lo hemos insertadp. Le devolvemos que se ha insertado
         // y le mandamos el articulo

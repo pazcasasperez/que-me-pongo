@@ -20,4 +20,6 @@ public interface ArticuloService {
 
     List<ArticuloDTO> findByTipo(String tipo);
 
+	List<ArticuloDTO> findByNombreUsuario(String nombreUsuario);
+
 }
