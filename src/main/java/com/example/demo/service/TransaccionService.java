@@ -13,4 +13,6 @@ public interface TransaccionService {
     List<ArticuloTransaccionDTO> findByArticulo(ArticuloDTO articuloDTO
     );
 
+	TransaccionDTO findByNombreUsuarioEstadoInicial(String nombreUsuario);
+
 }

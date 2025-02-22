@@ -21,7 +21,7 @@ import com.example.demo.web.controller.ArticuloController;
 
 @Service
 public class TransaccionServiceImpl implements TransaccionService {
-    private static final Logger log = LoggerFactory.getLogger(ArticuloController.class);
+    private static final Logger log = LoggerFactory.getLogger(TransaccionService.class);
 
     @Autowired
     private TransaccionRepository transaccionRepository;
@@ -31,7 +31,7 @@ public class TransaccionServiceImpl implements TransaccionService {
 
     @Override
     public List<TransaccionDTO> findAll() {
-        log.info(TransaccionRepository.class.getSimpleName() + "  -- Cambio a dto");
+        log.info(TransaccionService.class.getSimpleName() + "  -- Cambio a dto");
 
         List<Transaccion> listaTransaccion = transaccionRepository.findAll();
         List<TransaccionDTO> listaTransaccionDTO = new ArrayList<TransaccionDTO>();
@@ -59,6 +59,14 @@ public class TransaccionServiceImpl implements TransaccionService {
         return listaArticuloTransaccionDTO;
         
     }
+
+	@Override
+	public TransaccionDTO findByNombreUsuarioEstadoInicial(String nombreUsuario) {
+		log.info(TransaccionRepository.class.getSimpleName() + "  -- Buscando uan transaccion inicial del cliente " + nombreUsuario);
+		
+		
+		return null;
+	}
 
     
 
