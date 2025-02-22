@@ -51,6 +51,12 @@ public class ArticuloRestController {
         // y le mandamos el articulo
         return new ResponseEntity<>(articuloDTO, HttpStatus.OK);
     }
+    @GetMapping("/usuarios/{nombreUsuario}")
+    public ResponseEntity<List<ArticuloDTO>> findByNombreUsuario(@PathVariable("nombreUsuario") String nombreUsuario) {
+        log.info(ArticuloRestController.class.getSimpleName() + " -- Listando los artículos del cliente " + nombreUsuario);
+        List<ArticuloDTO> listaArticulosDTO = articuloService.findByNombreUsuario(nombreUsuario);
+        return new ResponseEntity<>(listaArticulosDTO, HttpStatus.OK);
+    }
 
     // Faltaria pasarle el cliente, y meterlo en el articulo
     @PostMapping("")

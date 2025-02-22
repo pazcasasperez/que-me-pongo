@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dto.ArticuloDTO;
 import com.example.demo.repository.dao.ArticuloRepository;
+import com.example.demo.repository.dao.UsuarioRepository;
 import com.example.demo.repository.entity.Articulo;
 import com.example.demo.repository.entity.Usuario;
 import com.example.demo.service.mapper.ArticuloMapper;
@@ -21,6 +22,8 @@ import com.example.demo.service.mapper.UsuarioMapper;
 public class ArticuloServiceImpl implements ArticuloService {
 	@Autowired
 	private ArticuloRepository articuloRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	private static final Logger log = LoggerFactory.getLogger(ArticuloServiceImpl.class);
 	@Autowired
 	private final ArticuloMapper articuloMapper = null;
@@ -104,6 +107,14 @@ public class ArticuloServiceImpl implements ArticuloService {
 		}
 	
 		return listaArticulosDTO;
+	}
+
+	@Override
+	public List<ArticuloDTO> findByNombreUsuario(String nombreUsuario) {
+		log.info(ArticuloServiceImpl.class.getSimpleName() + " -- Solicitamos la lista de articulos al servicio del usuario " + nombreUsuario);
+		Optional<Usuario> usuario = usuarioRepository.login(nombreUsuario);
+		List<Articulo> listaArticulos = articuloRepository.findByNombreUsuario(usuario.get().getId());
+		return listaArticulos.stream().map(articuloMapper::toDTO).collect(Collectors.toList());
 	}
 	
 }
