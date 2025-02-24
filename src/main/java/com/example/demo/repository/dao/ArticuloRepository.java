@@ -23,5 +23,8 @@ public interface ArticuloRepository extends JpaRepository <Articulo, Long> {
 	 
 	 @Query(value = "select * from articulos where tipo=:tipo;", nativeQuery = true)
 	 public  List<Articulo> findAllByTipo(@Param("tipo") String tipo);
+	 
+	 @Query(value = "select * from articulos where id_usuario=:idUsuario;", nativeQuery = true)
+	 public List<Articulo> findByNombreUsuario(Long idUsuario);
 
 }
